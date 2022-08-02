@@ -106,8 +106,6 @@ public class PelangganView extends javax.swing.JFrame {
 
         jSeparator1.setBackground(new java.awt.Color(255, 255, 102));
         jSeparator1.setForeground(new java.awt.Color(255, 255, 102));
-        jSeparator1.setMinimumSize(new java.awt.Dimension(0, 0));
-        jSeparator1.setPreferredSize(new java.awt.Dimension(0, 2));
         panelBody.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, 310, 320, 10));
 
         jSeparator2.setBackground(new java.awt.Color(255, 255, 102));
