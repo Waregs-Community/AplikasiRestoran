@@ -57,6 +57,19 @@ public class AdminView extends javax.swing.JFrame {
         btnKeluar = new javax.swing.JLabel();
         panelMain = new javax.swing.JPanel();
         panelHome = new javax.swing.JPanel();
+        Title = new javax.swing.JLabel();
+        boxTotalPenghasilan = new javax.swing.JPanel();
+        boxTitle2 = new javax.swing.JPanel();
+        txtTitle2 = new javax.swing.JLabel();
+        txtTotal3 = new javax.swing.JLabel();
+        boxTotalPenjualan = new javax.swing.JPanel();
+        boxTitle1 = new javax.swing.JPanel();
+        txtTitle1 = new javax.swing.JLabel();
+        txtTotal2 = new javax.swing.JLabel();
+        boxTotalProduk = new javax.swing.JPanel();
+        boxTitle = new javax.swing.JPanel();
+        txtTitle = new javax.swing.JLabel();
+        txtTotal1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MENU ADMIN");
@@ -154,17 +167,176 @@ public class AdminView extends javax.swing.JFrame {
         panelMain.setLayout(new java.awt.CardLayout());
 
         panelHome.setBackground(new java.awt.Color(192, 57, 42));
+        panelHome.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout panelHomeLayout = new javax.swing.GroupLayout(panelHome);
-        panelHome.setLayout(panelHomeLayout);
-        panelHomeLayout.setHorizontalGroup(
-            panelHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1051, Short.MAX_VALUE)
+        Title.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        Title.setForeground(new java.awt.Color(255, 255, 255));
+        Title.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        Title.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aplikasiRestoran/kelompok6/apps/asset/home.png"))); // NOI18N
+        Title.setText("Home");
+        panelHome.add(Title, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 40, 410, -1));
+
+        boxTotalPenghasilan.setBackground(new java.awt.Color(192, 57, 42));
+        boxTotalPenghasilan.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 4));
+        boxTotalPenghasilan.setPreferredSize(new java.awt.Dimension(250, 200));
+
+        boxTitle2.setBackground(new java.awt.Color(255, 255, 255));
+
+        txtTitle2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtTitle2.setForeground(new java.awt.Color(192, 57, 42));
+        txtTitle2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtTitle2.setText("Total Penghasilan");
+
+        javax.swing.GroupLayout boxTitle2Layout = new javax.swing.GroupLayout(boxTitle2);
+        boxTitle2.setLayout(boxTitle2Layout);
+        boxTitle2Layout.setHorizontalGroup(
+            boxTitle2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(boxTitle2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtTitle2, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
+                .addContainerGap())
         );
-        panelHomeLayout.setVerticalGroup(
-            panelHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 586, Short.MAX_VALUE)
+        boxTitle2Layout.setVerticalGroup(
+            boxTitle2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(boxTitle2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtTitle2, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                .addContainerGap())
         );
+
+        txtTotal3.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        txtTotal3.setForeground(new java.awt.Color(255, 255, 255));
+        txtTotal3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtTotal3.setText("10");
+
+        javax.swing.GroupLayout boxTotalPenghasilanLayout = new javax.swing.GroupLayout(boxTotalPenghasilan);
+        boxTotalPenghasilan.setLayout(boxTotalPenghasilanLayout);
+        boxTotalPenghasilanLayout.setHorizontalGroup(
+            boxTotalPenghasilanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(boxTitle2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(boxTotalPenghasilanLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtTotal3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        boxTotalPenghasilanLayout.setVerticalGroup(
+            boxTotalPenghasilanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(boxTotalPenghasilanLayout.createSequentialGroup()
+                .addComponent(boxTitle2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43)
+                .addComponent(txtTotal3)
+                .addContainerGap(44, Short.MAX_VALUE))
+        );
+
+        panelHome.add(boxTotalPenghasilan, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 140, -1, -1));
+
+        boxTotalPenjualan.setBackground(new java.awt.Color(192, 57, 42));
+        boxTotalPenjualan.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 4));
+        boxTotalPenjualan.setPreferredSize(new java.awt.Dimension(250, 200));
+
+        boxTitle1.setBackground(new java.awt.Color(255, 255, 255));
+
+        txtTitle1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtTitle1.setForeground(new java.awt.Color(192, 57, 42));
+        txtTitle1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtTitle1.setText("Total Penjualan");
+
+        javax.swing.GroupLayout boxTitle1Layout = new javax.swing.GroupLayout(boxTitle1);
+        boxTitle1.setLayout(boxTitle1Layout);
+        boxTitle1Layout.setHorizontalGroup(
+            boxTitle1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(boxTitle1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtTitle1, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        boxTitle1Layout.setVerticalGroup(
+            boxTitle1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(boxTitle1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtTitle1, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        txtTotal2.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        txtTotal2.setForeground(new java.awt.Color(255, 255, 255));
+        txtTotal2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtTotal2.setText("10");
+
+        javax.swing.GroupLayout boxTotalPenjualanLayout = new javax.swing.GroupLayout(boxTotalPenjualan);
+        boxTotalPenjualan.setLayout(boxTotalPenjualanLayout);
+        boxTotalPenjualanLayout.setHorizontalGroup(
+            boxTotalPenjualanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(boxTitle1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(boxTotalPenjualanLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtTotal2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        boxTotalPenjualanLayout.setVerticalGroup(
+            boxTotalPenjualanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(boxTotalPenjualanLayout.createSequentialGroup()
+                .addComponent(boxTitle1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43)
+                .addComponent(txtTotal2)
+                .addContainerGap(44, Short.MAX_VALUE))
+        );
+
+        panelHome.add(boxTotalPenjualan, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, -1, -1));
+
+        boxTotalProduk.setBackground(new java.awt.Color(192, 57, 42));
+        boxTotalProduk.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 4));
+        boxTotalProduk.setPreferredSize(new java.awt.Dimension(250, 200));
+
+        boxTitle.setBackground(new java.awt.Color(255, 255, 255));
+
+        txtTitle.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtTitle.setForeground(new java.awt.Color(192, 57, 42));
+        txtTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtTitle.setText("Total Makanan \ndan Minuman");
+
+        javax.swing.GroupLayout boxTitleLayout = new javax.swing.GroupLayout(boxTitle);
+        boxTitle.setLayout(boxTitleLayout);
+        boxTitleLayout.setHorizontalGroup(
+            boxTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(boxTitleLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        boxTitleLayout.setVerticalGroup(
+            boxTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(boxTitleLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        txtTotal1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        txtTotal1.setForeground(new java.awt.Color(255, 255, 255));
+        txtTotal1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtTotal1.setText("10");
+
+        javax.swing.GroupLayout boxTotalProdukLayout = new javax.swing.GroupLayout(boxTotalProduk);
+        boxTotalProduk.setLayout(boxTotalProdukLayout);
+        boxTotalProdukLayout.setHorizontalGroup(
+            boxTotalProdukLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(boxTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(boxTotalProdukLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtTotal1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        boxTotalProdukLayout.setVerticalGroup(
+            boxTotalProdukLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(boxTotalProdukLayout.createSequentialGroup()
+                .addComponent(boxTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43)
+                .addComponent(txtTotal1)
+                .addContainerGap(44, Short.MAX_VALUE))
+        );
+
+        panelHome.add(boxTotalProduk, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
 
         panelMain.add(panelHome, "card2");
 
@@ -232,6 +404,13 @@ public class AdminView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Title;
+    private javax.swing.JPanel boxTitle;
+    private javax.swing.JPanel boxTitle1;
+    private javax.swing.JPanel boxTitle2;
+    private javax.swing.JPanel boxTotalPenghasilan;
+    private javax.swing.JPanel boxTotalPenjualan;
+    private javax.swing.JPanel boxTotalProduk;
     private javax.swing.JLabel btnDataMakanan;
     private javax.swing.JLabel btnDataMinuman;
     private javax.swing.JLabel btnDataTransaksi;
@@ -243,5 +422,11 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JPanel panelHome;
     private javax.swing.JPanel panelMain;
     private javax.swing.JPanel panelMenu;
+    private javax.swing.JLabel txtTitle;
+    private javax.swing.JLabel txtTitle1;
+    private javax.swing.JLabel txtTitle2;
+    private javax.swing.JLabel txtTotal1;
+    private javax.swing.JLabel txtTotal2;
+    private javax.swing.JLabel txtTotal3;
     // End of variables declaration//GEN-END:variables
 }

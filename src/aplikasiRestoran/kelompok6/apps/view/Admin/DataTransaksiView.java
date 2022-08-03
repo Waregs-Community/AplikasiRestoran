@@ -36,34 +36,92 @@ public class DataTransaksiView extends javax.swing.JFrame {
     private void initComponents() {
 
         panelDataTransaksi = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        Title2 = new javax.swing.JLabel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        tableTransaksi = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(192, 57, 42));
-        getContentPane().setLayout(new java.awt.CardLayout());
+        setPreferredSize(new java.awt.Dimension(1051, 586));
 
         panelDataTransaksi.setBackground(new java.awt.Color(192, 57, 42));
+        panelDataTransaksi.setPreferredSize(new java.awt.Dimension(1020, 532));
+        panelDataTransaksi.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("Test Data TransaksiView");
+        Title2.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        Title2.setForeground(new java.awt.Color(255, 255, 255));
+        Title2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        Title2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aplikasiRestoran/kelompok6/apps/asset/transaction.png"))); // NOI18N
+        Title2.setText("Data Transaksi");
+        panelDataTransaksi.add(Title2, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 40, 410, -1));
 
-        javax.swing.GroupLayout panelDataTransaksiLayout = new javax.swing.GroupLayout(panelDataTransaksi);
-        panelDataTransaksi.setLayout(panelDataTransaksiLayout);
-        panelDataTransaksiLayout.setHorizontalGroup(
-            panelDataTransaksiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelDataTransaksiLayout.createSequentialGroup()
-                .addGap(139, 139, 139)
-                .addComponent(jLabel1)
-                .addContainerGap(144, Short.MAX_VALUE))
+        tableTransaksi.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID TRANSAKSI", "NAMA PELANGGAN", "NAMA MAKANAN", "HARGA MAKANAN", "QTY MAKANAN", "NAMA MINUMAN", "HARGA MINUMAN", "QTY MINUMAN", "TOTAL BAYAR"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane7.setViewportView(tableTransaksi);
+
+        panelDataTransaksi.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 1000, 410));
+
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aplikasiRestoran/kelompok6/apps/asset/print.png"))); // NOI18N
+        jButton1.setText("Cetak");
+        panelDataTransaksi.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 540, 100, 40));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelDataTransaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 1071, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
-        panelDataTransaksiLayout.setVerticalGroup(
-            panelDataTransaksiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelDataTransaksiLayout.createSequentialGroup()
-                .addGap(136, 136, 136)
-                .addComponent(jLabel1)
-                .addContainerGap(150, Short.MAX_VALUE))
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelDataTransaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 608, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
-
-        getContentPane().add(panelDataTransaksi, "card2");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -105,7 +163,10 @@ public class DataTransaksiView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel Title2;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JPanel panelDataTransaksi;
+    private javax.swing.JTable tableTransaksi;
     // End of variables declaration//GEN-END:variables
 }
