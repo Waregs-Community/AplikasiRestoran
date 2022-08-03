@@ -1,4 +1,4 @@
-package aplikasiRestoran.kelompok6.apps.view;
+   package aplikasiRestoran.kelompok6.apps.view;
 
 public class PelangganView extends javax.swing.JFrame {
 
