@@ -1,17 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package aplikasiRestoran.kelompok6.apps.main;
+import aplikasiRestoran.kelompok6.apps.database.AplikasiRestoranDB;
+import java.sql.SQLException;
 
-/**
- *
- * @author Asus N751J
- */
+
 public class Main {
     
-    public static void main(String[] args){
-    
+    public static void main(String[] args) throws SQLException {
+        //Main method sebagai class testing
+        
+        AplikasiRestoranDB.getConnection(); //Testing koneksi ke DataBase
     }
 }
