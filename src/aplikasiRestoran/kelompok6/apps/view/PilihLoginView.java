@@ -20,15 +20,6 @@ public class PilihLoginView extends javax.swing.JFrame {
         initComponents();
     }
     
-    //Getter 
-    public JButton getBtnAdmin() {
-        return btnAdmin;
-    }
-
-    public JButton getBtnPelanggan() {
-        return btnPelanggan;
-    }
-    
     
 
     /**
@@ -90,9 +81,6 @@ public class PilihLoginView extends javax.swing.JFrame {
         btnAdmin.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnAdmin.setForeground(new java.awt.Color(255, 255, 255));
         btnAdmin.setText("ADMIN");
-        btnAdmin.setMaximumSize(new java.awt.Dimension(95, 33));
-        btnAdmin.setMinimumSize(new java.awt.Dimension(95, 33));
-        btnAdmin.setPreferredSize(new java.awt.Dimension(95, 33));
         PanelLoginAs.add(btnAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 140, 100));
 
         btnPelanggan.setBackground(new java.awt.Color(192, 57, 43));
