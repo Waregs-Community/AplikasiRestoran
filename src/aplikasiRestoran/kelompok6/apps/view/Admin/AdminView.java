@@ -2,6 +2,7 @@ package aplikasiRestoran.kelompok6.apps.view.Admin;
 
 import aplikasiRestoran.kelompok6.apps.controller.AdminController;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class AdminView extends javax.swing.JFrame {
@@ -39,7 +40,18 @@ public class AdminView extends javax.swing.JFrame {
     public JPanel getPanelHome() {
         return panelHome;
     }
-    
+
+    public JLabel getTxtTotalPenghasilan() {
+        return txtTotalPenghasilan;
+    }
+
+    public JLabel getTxtTotalPenjualan() {
+        return txtTotalPenjualan;
+    }
+
+    public JLabel getTxtTotalProduk() {
+        return txtTotalProduk;
+    }
     
     
     @SuppressWarnings("unchecked")
@@ -61,15 +73,15 @@ public class AdminView extends javax.swing.JFrame {
         boxTotalPenghasilan = new javax.swing.JPanel();
         boxTitle2 = new javax.swing.JPanel();
         txtTitle2 = new javax.swing.JLabel();
-        txtTotal3 = new javax.swing.JLabel();
+        txtTotalPenghasilan = new javax.swing.JLabel();
         boxTotalPenjualan = new javax.swing.JPanel();
         boxTitle1 = new javax.swing.JPanel();
         txtTitle1 = new javax.swing.JLabel();
-        txtTotal2 = new javax.swing.JLabel();
+        txtTotalPenjualan = new javax.swing.JLabel();
         boxTotalProduk = new javax.swing.JPanel();
         boxTitle = new javax.swing.JPanel();
         txtTitle = new javax.swing.JLabel();
-        txtTotal1 = new javax.swing.JLabel();
+        txtTotalProduk = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MENU ADMIN");
@@ -204,10 +216,10 @@ public class AdminView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        txtTotal3.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        txtTotal3.setForeground(new java.awt.Color(255, 255, 255));
-        txtTotal3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtTotal3.setText("10");
+        txtTotalPenghasilan.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        txtTotalPenghasilan.setForeground(new java.awt.Color(255, 255, 255));
+        txtTotalPenghasilan.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtTotalPenghasilan.setText("10");
 
         javax.swing.GroupLayout boxTotalPenghasilanLayout = new javax.swing.GroupLayout(boxTotalPenghasilan);
         boxTotalPenghasilan.setLayout(boxTotalPenghasilanLayout);
@@ -216,7 +228,7 @@ public class AdminView extends javax.swing.JFrame {
             .addComponent(boxTitle2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(boxTotalPenghasilanLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(txtTotal3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtTotalPenghasilan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         boxTotalPenghasilanLayout.setVerticalGroup(
@@ -224,7 +236,7 @@ public class AdminView extends javax.swing.JFrame {
             .addGroup(boxTotalPenghasilanLayout.createSequentialGroup()
                 .addComponent(boxTitle2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(43, 43, 43)
-                .addComponent(txtTotal3)
+                .addComponent(txtTotalPenghasilan)
                 .addContainerGap(44, Short.MAX_VALUE))
         );
 
@@ -258,10 +270,10 @@ public class AdminView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        txtTotal2.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        txtTotal2.setForeground(new java.awt.Color(255, 255, 255));
-        txtTotal2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtTotal2.setText("10");
+        txtTotalPenjualan.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        txtTotalPenjualan.setForeground(new java.awt.Color(255, 255, 255));
+        txtTotalPenjualan.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtTotalPenjualan.setText("10");
 
         javax.swing.GroupLayout boxTotalPenjualanLayout = new javax.swing.GroupLayout(boxTotalPenjualan);
         boxTotalPenjualan.setLayout(boxTotalPenjualanLayout);
@@ -270,7 +282,7 @@ public class AdminView extends javax.swing.JFrame {
             .addComponent(boxTitle1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(boxTotalPenjualanLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(txtTotal2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtTotalPenjualan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         boxTotalPenjualanLayout.setVerticalGroup(
@@ -278,7 +290,7 @@ public class AdminView extends javax.swing.JFrame {
             .addGroup(boxTotalPenjualanLayout.createSequentialGroup()
                 .addComponent(boxTitle1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(43, 43, 43)
-                .addComponent(txtTotal2)
+                .addComponent(txtTotalPenjualan)
                 .addContainerGap(44, Short.MAX_VALUE))
         );
 
@@ -312,10 +324,10 @@ public class AdminView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        txtTotal1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        txtTotal1.setForeground(new java.awt.Color(255, 255, 255));
-        txtTotal1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtTotal1.setText("10");
+        txtTotalProduk.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        txtTotalProduk.setForeground(new java.awt.Color(255, 255, 255));
+        txtTotalProduk.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtTotalProduk.setText("10");
 
         javax.swing.GroupLayout boxTotalProdukLayout = new javax.swing.GroupLayout(boxTotalProduk);
         boxTotalProduk.setLayout(boxTotalProdukLayout);
@@ -324,7 +336,7 @@ public class AdminView extends javax.swing.JFrame {
             .addComponent(boxTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(boxTotalProdukLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(txtTotal1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtTotalProduk, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         boxTotalProdukLayout.setVerticalGroup(
@@ -332,7 +344,7 @@ public class AdminView extends javax.swing.JFrame {
             .addGroup(boxTotalProdukLayout.createSequentialGroup()
                 .addComponent(boxTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(43, 43, 43)
-                .addComponent(txtTotal1)
+                .addComponent(txtTotalProduk)
                 .addContainerGap(44, Short.MAX_VALUE))
         );
 
@@ -425,8 +437,8 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JLabel txtTitle;
     private javax.swing.JLabel txtTitle1;
     private javax.swing.JLabel txtTitle2;
-    private javax.swing.JLabel txtTotal1;
-    private javax.swing.JLabel txtTotal2;
-    private javax.swing.JLabel txtTotal3;
+    private javax.swing.JLabel txtTotalPenghasilan;
+    private javax.swing.JLabel txtTotalPenjualan;
+    private javax.swing.JLabel txtTotalProduk;
     // End of variables declaration//GEN-END:variables
 }
