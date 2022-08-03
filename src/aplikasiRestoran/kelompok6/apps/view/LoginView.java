@@ -53,7 +53,6 @@ public class LoginView extends javax.swing.JFrame {
         lblLoginForm.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aplikasiRestoran/kelompok6/apps/asset/user (1).png"))); // NOI18N
         lblLoginForm.setText("LOGIN FORM");
         lblLoginForm.setIconTextGap(10);
-        lblLoginForm.setPreferredSize(new java.awt.Dimension(205, 45));
         panelLogin.add(lblLoginForm, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 38, 240, 51));
 
         lblUsername.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
