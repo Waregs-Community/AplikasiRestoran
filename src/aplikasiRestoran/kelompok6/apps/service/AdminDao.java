@@ -1,14 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package aplikasiRestoran.kelompok6.apps.service;
 
-/**
- *
- * @author Asus N751J
- */
+import aplikasiRestoran.kelompok6.apps.entity.Admin;
+import aplikasiRestoran.kelompok6.apps.exception.AdminException;
+import java.util.List;
+
 public interface AdminDao {
+    
+    public void insertData(Admin admin) throws AdminException;
+    public void updateData(Admin admin) throws AdminException;
+    public void deleteData(int id) throws AdminException;
+    public Admin getDataId(int id) throws AdminException;
+    public List<Admin> selectAllData() throws AdminException;
+    
     
 }

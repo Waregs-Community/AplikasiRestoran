@@ -1,5 +1,7 @@
 package aplikasiRestoran.kelompok6.apps.database;
 
+import aplikasiRestoran.kelompok6.apps.Impl.AdminDaoImpl;
+import aplikasiRestoran.kelompok6.apps.service.AdminDao;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import java.sql.SQLException;
@@ -7,6 +9,7 @@ import java.sql.SQLException;
 public class AplikasiRestoranDB {
 
     private static Connection connection;
+    private static AdminDao adminDao;
     
     public static Connection getConnection() throws SQLException{
     
@@ -29,5 +32,15 @@ public class AplikasiRestoranDB {
         return connection;
     
     } 
+    
+    public static AdminDao getData() throws SQLException{
+        
+        if(adminDao == null){
+            adminDao = new AdminDaoImpl(getConnection());
+        }
+        
+        return adminDao;
+        
+    }
     
 }
