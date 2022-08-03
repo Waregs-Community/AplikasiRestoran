@@ -79,7 +79,7 @@
             <Component class="javax.swing.JLabel" name="iconJempol">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/aplikasiRestoran/kelompok6/apps/icon/jempol.png"/>
+                  <Image iconType="3" name="/aplikasiRestoran/kelompok6/apps/asset/jempol.png"/>
                 </Property>
               </Properties>
               <Constraints>
@@ -91,7 +91,7 @@
             <Component class="javax.swing.JLabel" name="iconTakoyaki">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/aplikasiRestoran/kelompok6/apps/icon/takoyaki.png"/>
+                  <Image iconType="3" name="/aplikasiRestoran/kelompok6/apps/asset/takoyaki.png"/>
                 </Property>
               </Properties>
               <Constraints>
@@ -103,7 +103,7 @@
             <Component class="javax.swing.JLabel" name="iconMieAyam">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/aplikasiRestoran/kelompok6/apps/icon/mieayam.png"/>
+                  <Image iconType="3" name="/aplikasiRestoran/kelompok6/apps/asset/mieayam.png"/>
                 </Property>
               </Properties>
               <Constraints>
@@ -115,7 +115,7 @@
             <Component class="javax.swing.JLabel" name="iconRoti">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/aplikasiRestoran/kelompok6/apps/icon/roti.png"/>
+                  <Image iconType="3" name="/aplikasiRestoran/kelompok6/apps/asset/roti.png"/>
                 </Property>
               </Properties>
               <Constraints>

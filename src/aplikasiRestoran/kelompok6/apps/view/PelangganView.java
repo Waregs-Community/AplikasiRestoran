@@ -1,23 +1,38 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package aplikasiRestoran.kelompok6.apps.view;
 
-/**
- *
- * @author Asus N751J
- */
 public class PelangganView extends javax.swing.JFrame {
 
-    /**
-     * Creates new form PelangganView
-     */
+    
     public PelangganView() {
         initComponents();
     }
+    
+    public javax.swing.JComboBox<String> getCmbMakanan() {
+        return cmbMakanan;
+    }
+    public javax.swing.JComboBox<String> getCmbMinuman() {
+        return cmbMinuman;
+    }
+    public javax.swing.JTextField getTxtHargaMakanan() {
+        return txtHargaMakanan;
+    }
+    public javax.swing.JTextField getTxtHargaMinuman() {
+        return txtHargaMinuman;
+    }
+    public javax.swing.JTextField getTxtNamaPemesan() {
+        return txtNamaPemesan;
+    }
+    public javax.swing.JTextField getTxtQtyMakanan() {
+        return txtQtyMakanan;
+    }
+    public javax.swing.JTextField getTxtQtyMinuman() {
+        return txtQtyMinuman;
+    }
+    public javax.swing.JTextField getTxtTotalBayar() {
+        return txtTotalBayar;
+    }
 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -75,16 +90,16 @@ public class PelangganView extends javax.swing.JFrame {
         panelBestSeller.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "BEST SELLER", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 36), new java.awt.Color(255, 255, 102))); // NOI18N
         panelBestSeller.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        iconJempol.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aplikasiRestoran/kelompok6/apps/icon/jempol.png"))); // NOI18N
+        iconJempol.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aplikasiRestoran/kelompok6/apps/asset/jempol.png"))); // NOI18N
         panelBestSeller.add(iconJempol, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 0, 40, 50));
 
-        iconTakoyaki.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aplikasiRestoran/kelompok6/apps/icon/takoyaki.png"))); // NOI18N
+        iconTakoyaki.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aplikasiRestoran/kelompok6/apps/asset/takoyaki.png"))); // NOI18N
         panelBestSeller.add(iconTakoyaki, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 130, -1));
 
-        iconMieAyam.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aplikasiRestoran/kelompok6/apps/icon/mieayam.png"))); // NOI18N
+        iconMieAyam.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aplikasiRestoran/kelompok6/apps/asset/mieayam.png"))); // NOI18N
         panelBestSeller.add(iconMieAyam, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, 130, -1));
 
-        iconRoti.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aplikasiRestoran/kelompok6/apps/icon/roti.png"))); // NOI18N
+        iconRoti.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aplikasiRestoran/kelompok6/apps/asset/roti.png"))); // NOI18N
         panelBestSeller.add(iconRoti, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 90, 130, -1));
 
         lblTakoyaki.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
