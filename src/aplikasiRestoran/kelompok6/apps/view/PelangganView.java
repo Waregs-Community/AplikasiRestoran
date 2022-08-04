@@ -1,9 +1,22 @@
    package aplikasiRestoran.kelompok6.apps.view;
 
-public class PelangganView extends javax.swing.JFrame {
+import aplikasiRestoran.kelompok6.apps.controller.PelangganController;
+import aplikasiRestoran.kelompok6.apps.event.PelangganListener;
+import aplikasiRestoran.kelompok6.apps.model.PelangganModel;
 
+public class PelangganView extends javax.swing.JFrame implements PelangganListener {
+
+    private PelangganModel model;
+    private PelangganController controller;
+    
     
     public PelangganView() {
+        model = new PelangganModel();
+        controller = new PelangganController();
+        
+        model.setPelangganListener(this);
+        controller.setModel(model);
+        
         initComponents();
     }
     
@@ -28,11 +41,11 @@ public class PelangganView extends javax.swing.JFrame {
     public javax.swing.JTextField getTxtQtyMinuman() {
         return txtQtyMinuman;
     }
-    public javax.swing.JTextField getTxtTotalBayar() {
-        return txtTotalBayar;
+    public javax.swing.JTextField getTxtTotalHarga() {
+        return txtTotalHarga;
     }
-
     
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -71,7 +84,7 @@ public class PelangganView extends javax.swing.JFrame {
         lblTotalBayar = new javax.swing.JLabel();
         lblNamaPemesan = new javax.swing.JLabel();
         txtNamaPemesan = new javax.swing.JTextField();
-        txtTotalBayar = new javax.swing.JTextField();
+        txtTotalHarga = new javax.swing.JTextField();
         btnPesan = new javax.swing.JButton();
         btnReset = new javax.swing.JButton();
 
@@ -225,10 +238,10 @@ public class PelangganView extends javax.swing.JFrame {
         txtNamaPemesan.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         panelBody.add(txtNamaPemesan, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 560, 150, 30));
 
-        txtTotalBayar.setEditable(false);
-        txtTotalBayar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtTotalBayar.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        panelBody.add(txtTotalBayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 560, 150, 30));
+        txtTotalHarga.setEditable(false);
+        txtTotalHarga.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtTotalHarga.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        panelBody.add(txtTotalHarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 560, 150, 30));
 
         btnPesan.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnPesan.setText("PESAN");
@@ -236,6 +249,11 @@ public class PelangganView extends javax.swing.JFrame {
 
         btnReset.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnReset.setText("RESET");
+        btnReset.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnResetMouseClicked(evt);
+            }
+        });
         panelBody.add(btnReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 620, 110, 50));
 
         getContentPane().add(panelBody, "card2");
@@ -243,6 +261,10 @@ public class PelangganView extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnResetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnResetMouseClicked
+        controller.resetPesanan(this);
+    }//GEN-LAST:event_btnResetMouseClicked
 
     /**
      * @param args the command line arguments
@@ -311,6 +333,14 @@ public class PelangganView extends javax.swing.JFrame {
     private javax.swing.JTextField txtNamaPemesan;
     private javax.swing.JTextField txtQtyMakanan;
     private javax.swing.JTextField txtQtyMinuman;
-    private javax.swing.JTextField txtTotalBayar;
+    private javax.swing.JTextField txtTotalHarga;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void onChange(PelangganModel pelanggan) {
+//        this.txtNamaPemesan.setText(model.getNamaPemesan());
+//        this.cmbMakanan.setSelectedItem(model.getNamaMakanan());
+//        this.cmbMinuman.setSelectedItem(model.getNamaMinuman());
+//        this.txtHargaMakanan(String.valueOf(model.getHargaMakanan())) kenapa gabisa mulu
+    }
 }
