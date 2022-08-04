@@ -19,7 +19,7 @@ public class AplikasiRestoranDB {
             MysqlDataSource dataSource = new MysqlDataSource();
             
             //Set Nilai URL, username, & password dari db yg diacu
-            dataSource.setURL("jdbc:mysql://localhost:3306/aplikasirestoran_db");
+            dataSource.setURL("jdbc:mysql://localhost/aplikasirestoran_db");
             dataSource.setUser("root");
             dataSource.setPassword("");
             

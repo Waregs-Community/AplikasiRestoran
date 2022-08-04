@@ -30,15 +30,27 @@ public class AdminDaoImpl implements AdminDao{
         PreparedStatement statement = null;
         
         try{
+            connection.setAutoCommit(false);
             statement = connection.prepareStatement(insertData);
             statement.setInt(1, admin.getId());
             statement.setString(2, admin.getNama());
             statement.setInt(3, admin.getHarga());
             statement.executeUpdate();
             
+            connection.commit();
         } catch (SQLException ex) {
+            try{
+                connection.rollback();
+            }catch(SQLException x){
+                
+            }
             throw new AdminException(ex.getMessage());
         } finally {
+            try{
+                connection.setAutoCommit(true);
+            }catch(SQLException x){    
+            }
+            
             if(statement != null){
                 try{
                     statement.close();
@@ -54,13 +66,19 @@ public class AdminDaoImpl implements AdminDao{
         PreparedStatement statement = null;
         
         try{
+            connection.setAutoCommit(false);
             statement = connection.prepareStatement(updateData);
             statement.setInt(1, admin.getId());
             statement.setString(2, admin.getNama());
             statement.setInt(3, admin.getHarga());
             statement.executeUpdate();
-            
+            connection.commit();
         } catch (SQLException ex) {
+            try{
+                connection.rollback();
+            }catch(SQLException x){
+                
+            }
             throw new AdminException(ex.getMessage());
         } finally {
             if(statement != null){
@@ -79,13 +97,23 @@ public class AdminDaoImpl implements AdminDao{
         PreparedStatement statement = null;
         
         try{
+            connection.setAutoCommit(false);
             statement = connection.prepareStatement(deleteData);
             statement.setInt(1, id);
             statement.executeUpdate();
-            
+            connection.commit();
         } catch (SQLException ex) {
+            try{
+                connection.rollback();
+            }catch(SQLException x){
+                
+            }
             throw new AdminException(ex.getMessage());
         } finally {
+            try{
+                connection.setAutoCommit(true);
+            }catch(SQLException x){    
+            }
             if(statement != null){
                 try{
                     statement.close();
@@ -101,6 +129,7 @@ public class AdminDaoImpl implements AdminDao{
         PreparedStatement statement = null;
         
         try{
+            connection.setAutoCommit(false);
             statement = connection.prepareStatement(getById);
             statement.setInt(1, id);
             ResultSet result = statement.executeQuery();
@@ -116,11 +145,20 @@ public class AdminDaoImpl implements AdminDao{
             }else{
                 throw new AdminException("Data Anggota dengan ID = " + id+ " Tidak Ditemukan Didalam Database.");
             }
-            
+            connection.commit();
             return admin;
         } catch (SQLException ex) {
+            try{
+                connection.rollback();
+            }catch(SQLException x){
+                
+            }
             throw new AdminException(ex.getMessage());
         } finally {
+            try{
+                connection.setAutoCommit(true);
+            }catch(SQLException x){    
+            }
             if(statement != null){
                 try{
                     statement.close();
@@ -137,6 +175,7 @@ public class AdminDaoImpl implements AdminDao{
         List<Admin> list = new ArrayList<Admin>();
         
         try{
+            connection.setAutoCommit(false);
             statement = (PreparedStatement) connection.createStatement();
             ResultSet result = statement.executeQuery(selectAll);
             
@@ -148,10 +187,20 @@ public class AdminDaoImpl implements AdminDao{
                 
                 list.add(admin);
             }
+            connection.commit();
             return list;
         } catch (SQLException ex) {
+            try{
+                connection.rollback();
+            }catch(SQLException x){
+                
+            }
             throw new AdminException(ex.getMessage());
         } finally {
+            try{
+                connection.setAutoCommit(true);
+            }catch(SQLException x){    
+            }
             if(statement != null){
                 try{
                     statement.close();
