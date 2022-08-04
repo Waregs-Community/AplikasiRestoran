@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,9 +15,9 @@ public class AdminDaoImpl implements AdminDao{
     
     private Connection connection;
     private final String insertData = "INSERT INTO makanan VALUES (?,?,?)";
-    private final String updateData = "UPDATE makanan SET nama_makanan = ?, harga_makanan =? where id_makanan =?";
+    private final String updateData = "UPDATE makanan SET nama_makanan = ?, harga_makanan = ? where id_makanan =?";
     private final String deleteData = "DELETE FROM makanan WHERE id_makanan = ?";
-    private final String getById = "SELECT * FROM makanan WHERE id=?";
+    private final String getById = "SELECT * FROM makanan WHERE id_makanan=?";
     private final String selectAll = "SELECT * FROM makanan";
     
     public AdminDaoImpl(Connection connection){
@@ -68,9 +69,9 @@ public class AdminDaoImpl implements AdminDao{
         try{
             connection.setAutoCommit(false);
             statement = connection.prepareStatement(updateData);
-            statement.setInt(1, admin.getId());
-            statement.setString(2, admin.getNama());
-            statement.setInt(3, admin.getHarga());
+            statement.setString(1, admin.getNama());
+            statement.setInt(2, admin.getHarga());
+            statement.setInt(3,admin.getId() );
             statement.executeUpdate();
             connection.commit();
         } catch (SQLException ex) {
@@ -139,9 +140,9 @@ public class AdminDaoImpl implements AdminDao{
             if(result.next()){
                 
                 admin = new Admin();
-                admin.setId(result.getInt("id"));
-                admin.setNama(result.getString("nama"));
-                admin.setHarga(result.getInt("id"));
+                admin.setId(result.getInt("id_makanan"));
+                admin.setNama(result.getString("nama_makanan"));
+                admin.setHarga(result.getInt("harga_makanan"));
             }else{
                 throw new AdminException("Data Anggota dengan ID = " + id+ " Tidak Ditemukan Didalam Database.");
             }
@@ -171,19 +172,20 @@ public class AdminDaoImpl implements AdminDao{
 
     @Override
     public List<Admin> selectAllData() throws AdminException {
+        
         PreparedStatement statement = null;
         List<Admin> list = new ArrayList<Admin>();
         
         try{
             connection.setAutoCommit(false);
-            statement = (PreparedStatement) connection.createStatement();
-            ResultSet result = statement.executeQuery(selectAll);
+            statement = connection.prepareStatement(selectAll);
+            ResultSet result = statement.executeQuery();
             
             while(result.next()){
                 Admin admin = new Admin();
-                admin.setId(result.getInt("id"));
-                admin.setNama(result.getString("nama"));
-                admin.setHarga(result.getInt("harga"));
+                admin.setId(result.getInt("id_makanan"));
+                admin.setNama(result.getString("nama_makanan"));
+                admin.setHarga(result.getInt("harga_makanan"));
                 
                 list.add(admin);
             }
