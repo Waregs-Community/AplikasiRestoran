@@ -20,12 +20,149 @@ public class PelangganDaoImpl implements PelangganDao{
                                         + "VALUES ( ?, ?, ?, ?, ?, ?, ?,?)";
     private final String selectAllMakanan  = "SELECT * FROM makanan";
     private final String selectAllMinuman  = "SELECT * FROM minuman";
+    private final String getHMakananById = "SELECT * FROM makanan WHERE id_makanan =?";
+    private final String getHMinumanById = "SELECT * FROM minuman WHERE id_minuman =?";
     
     public PelangganDaoImpl(Connection connection){
         this.connection = connection;
     }
     
+
+    //Method utk menampilkan data makanan pada comboBox
+    @Override
+    public List<Pelanggan> selectAllMakanan() throws PelangganException {
+        Statement statement = null;
+        List<Pelanggan> list = new ArrayList<Pelanggan>();
+        
+        try{
+            statement = connection.createStatement();
+            ResultSet result = statement.executeQuery(selectAllMakanan);
+            
+            while(result.next()){
+                Pelanggan makanan = new Pelanggan();
+                makanan.setNamaMakanan(result.getString("nama_makanan"));
+                
+                list.add(makanan);
+            }
+            
+            return list;
+        }catch(SQLException ex){
+            throw new PelangganException(ex.getMessage());
+        }
+        finally{
+            if(statement != null){
+                try{
+                    statement.close();
+                } catch(SQLException ex){
+
+                }
+            }
+        }
+    }
     
+    //Method utk menampilkan data minuman pada comboBox
+    @Override
+    public List<Pelanggan> selectAllMinuman() throws PelangganException {
+        Statement statement = null;
+        List<Pelanggan> list = new ArrayList<Pelanggan>();
+        
+        try{
+            statement = connection.createStatement();
+            ResultSet result = statement.executeQuery(selectAllMinuman);
+            
+            while(result.next()){
+                Pelanggan minuman = new Pelanggan();
+                minuman.setNamaMinuman(result.getString("nama_minuman"));
+                
+                list.add(minuman);
+            }
+            
+            return list;
+        }catch(SQLException ex){
+            throw new PelangganException(ex.getMessage());
+        }
+        finally{
+            if(statement != null){
+                try{
+                    statement.close();
+                } catch(SQLException ex){
+                    
+                }
+            }
+        }
+    }
+    
+    //Method utk menampilkan harga makanan by id
+    @Override
+    public Pelanggan getHMakananById(Integer id) throws PelangganException {
+        PreparedStatement statement = null;
+        
+        try{
+            statement = connection.prepareStatement(getHMakananById);
+            statement.setInt(1, id);
+            ResultSet result = statement.executeQuery();
+            
+            Pelanggan harga = null;
+            
+            if(result.next()){
+                harga = new Pelanggan();
+                harga.setHargaMakanan(result.getInt("harga_makanan"));
+                
+            }else{
+                throw new PelangganException("Data Harga Makanan dengan ID = "+id
+                                            +" Tidak Ditemukan di DataBase");
+            }
+            return harga;
+        }catch(SQLException ex){
+            throw new PelangganException(ex.getMessage());
+        }
+        finally{
+            if(statement != null){
+                try{
+                    statement.close();
+                } catch(SQLException ex){
+                    
+                }
+            }
+        }
+    }
+
+    //Method utk menampilkan harga minuman by id
+    @Override
+    public Pelanggan getHMinumanById(Integer id) throws PelangganException {
+        PreparedStatement statement = null;
+        
+        try{
+            statement = connection.prepareStatement(getHMinumanById);
+            statement.setInt(1, id);
+            ResultSet result = statement.executeQuery();
+            
+            Pelanggan harga = null;
+            
+            if(result.next()){
+                harga = new Pelanggan();
+                harga.setHargaMinuman(result.getInt("harga_minuman"));
+                
+            }else{
+                throw new PelangganException("Data Harga Minuman dengan ID = "+id
+                                            +" Tidak Ditemukan di DataBase");
+            }
+            return harga;
+        }catch(SQLException ex){
+            throw new PelangganException(ex.getMessage());
+        }
+        finally{
+            if(statement != null){
+                try{
+                    statement.close();
+                } catch(SQLException ex){
+                    
+                }
+            }
+        }
+    }
+    
+    //Method untuk insert pesanan ke tabel transaksi
     @Override
     public void insertPesanan(Pelanggan pesanan) throws PelangganException {
         PreparedStatement statement = null;
@@ -68,79 +205,4 @@ public class PelangganDaoImpl implements PelangganDao{
             }
         } 
     }
-
-    @Override
-    public Pelanggan getCmbMakananPerformed(Integer id) throws PelangganException {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public Pelanggan getCmbMinumanPerformed(Integer id) throws PelangganException {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    //
-    @Override
-    public List<Pelanggan> selectAllMakanan() throws PelangganException {
-        Statement statement = null;
-        List<Pelanggan> list = new ArrayList<Pelanggan>();
-        
-        try{
-            statement = connection.createStatement();
-            ResultSet result = statement.executeQuery(selectAllMakanan);
-            
-            while(result.next()){
-                Pelanggan makanan = new Pelanggan();
-                makanan.setNamaMakanan(result.getString("nama_makanan"));
-                
-                list.add(makanan);
-            }
-            
-            return list;
-        }catch(SQLException ex){
-            throw new PelangganException(ex.getMessage());
-        }
-        finally{
-            if(statement != null){
-                try{
-                    statement.close();
-                } catch(SQLException ex){
-
-                }
-            }
-        }
-    }
-    
-
-    @Override
-    public List<Pelanggan> selectAllMinuman() throws PelangganException {
-        Statement statement = null;
-        List<Pelanggan> list = new ArrayList<Pelanggan>();
-        
-        try{
-            statement = connection.createStatement();
-            ResultSet result = statement.executeQuery(selectAllMinuman);
-            
-            while(result.next()){
-                Pelanggan minuman = new Pelanggan();
-                minuman.setNamaMinuman(result.getString("nama_minuman"));
-                
-                list.add(minuman);
-            }
-            
-            return list;
-        }catch(SQLException ex){
-            throw new PelangganException(ex.getMessage());
-        }
-        finally{
-            if(statement != null){
-                try{
-                    statement.close();
-                } catch(SQLException ex){
-                    
-                }
-            }
-        }
-    }
-    
 }
