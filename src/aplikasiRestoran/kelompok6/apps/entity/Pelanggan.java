@@ -7,6 +7,8 @@ public class Pelanggan {
     
     private int idMakanan;
     private int idMinuman;
+    private String namaMakanan;
+    private String namaMinuman;
     private int hargaMakanan;
     private int hargaMinuman;
     private int qtyMakanan;
@@ -27,6 +29,20 @@ public class Pelanggan {
     }
     public void setIdMinuman(int idMinuman) {
         this.idMinuman = idMinuman;
+    }
+
+    public String getNamaMakanan() {
+        return namaMakanan;
+    }
+    public void setNamaMakanan(String namaMakanan) {
+        this.namaMakanan = namaMakanan;
+    }
+
+    public String getNamaMinuman() {
+        return namaMinuman;
+    }
+    public void setNamaMinuman(String namaMinuman) {
+        this.namaMinuman = namaMinuman;
     }
     
     public int getHargaMakanan() {
@@ -76,6 +92,8 @@ public class Pelanggan {
         int hash = 7;
         hash = 23 * hash + this.idMakanan;
         hash = 23 * hash + this.idMinuman;
+        hash = 23 * hash + Objects.hashCode(this.namaMakanan);
+        hash = 23 * hash + Objects.hashCode(this.namaMinuman);
         hash = 23 * hash + this.hargaMakanan;
         hash = 23 * hash + this.hargaMinuman;
         hash = 23 * hash + this.qtyMakanan;
@@ -103,6 +121,12 @@ public class Pelanggan {
         if (this.idMakanan != other.idMakanan) {
             return false;
         }
+        if (!Objects.equals(this.namaMakanan, other.namaMakanan)) {
+            return false;
+        }
+        if (!Objects.equals(this.namaMinuman, other.namaMinuman)) {
+            return false;
+        }
         if (this.hargaMakanan != other.hargaMakanan) {
             return false;
         }
@@ -128,9 +152,11 @@ public class Pelanggan {
     
     }
     
-    public Pelanggan(int idMakanan, int idMinuman, int hargaMakanan, int hargaMinuman, int qtyMakanan, int qtyMinuman, String namaPemesan, int totalHarga){
+    public Pelanggan(int idMakanan, int idMinuman, String namaMakanan, String namaMinuman, int hargaMakanan, int hargaMinuman, int qtyMakanan, int qtyMinuman, String namaPemesan, int totalHarga){
         this.idMakanan = idMakanan;
         this.idMakanan = idMinuman;
+        this.namaMakanan = namaMakanan;
+        this.namaMinuman = namaMinuman;
         this.hargaMakanan = hargaMakanan;
         this.hargaMinuman = hargaMinuman;
         this.qtyMakanan = qtyMakanan;

@@ -46,7 +46,7 @@ public class AplikasiRestoranDB {
         
     }
     
-    public static PelangganDao getTransaksi() throws SQLException{
+    public static PelangganDao getDataPesanan() throws SQLException{
         if(pelangganDao == null){
             pelangganDao = new PelangganDaoImpl(getConnection());
         }

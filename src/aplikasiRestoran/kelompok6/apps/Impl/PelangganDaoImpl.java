@@ -7,6 +7,8 @@ import com.mysql.jdbc.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -16,7 +18,8 @@ public class PelangganDaoImpl implements PelangganDao{
     private final String insertPesanan = "INSERT INTO transaksi"
                                         + "(nama_pelanggan, id_makanan,harga_makanan,total_makanan, id_minuman,harga_minuman,total_minuman,total_bayar)"
                                         + "VALUES ( ?, ?, ?, ?, ?, ?, ?,?)";
-    private final String getMakananId  = "SELECT * FROM makanan";
+    private final String selectAllMakanan  = "SELECT * FROM makanan";
+    private final String selectAllMinuman  = "SELECT * FROM minuman";
     
     public PelangganDaoImpl(Connection connection){
         this.connection = connection;
@@ -68,23 +71,32 @@ public class PelangganDaoImpl implements PelangganDao{
 
     @Override
     public Pelanggan getCmbMakananPerformed(Integer id) throws PelangganException {
-        PreparedStatement statement = null;
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public Pelanggan getCmbMinumanPerformed(Integer id) throws PelangganException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    //
+    @Override
+    public List<Pelanggan> selectAllMakanan() throws PelangganException {
+        Statement statement = null;
+        List<Pelanggan> list = new ArrayList<Pelanggan>();
+        
         try{
-            statement = connection.prepareStatement(getMakananId);
+            statement = connection.createStatement();
+            ResultSet result = statement.executeQuery(selectAllMakanan);
             
-            statement.setInt(1, id);
-            ResultSet result = statement.executeQuery();
-            
-            Pelanggan pelanggan = null;
-            if(result.next()){
-                pelanggan = new Pelanggan();
-                pelanggan.setHargaMakanan(result.getInt("Id"));
-//                getNamaMakanan().addItem(result.getString("nama_makanan"));
-            }else {
-                throw new PelangganException("Data Makanan dengan ID = " + id
-                                            + " Tidak Ada");
+            while(result.next()){
+                Pelanggan makanan = new Pelanggan();
+                makanan.setNamaMakanan(result.getString("nama_makanan"));
+                
+                list.add(makanan);
             }
-            return pelanggan;
+            
+            return list;
         }catch(SQLException ex){
             throw new PelangganException(ex.getMessage());
         }
@@ -93,55 +105,42 @@ public class PelangganDaoImpl implements PelangganDao{
                 try{
                     statement.close();
                 } catch(SQLException ex){
-                
+
                 }
             }
         }
     }
-
-    @Override
-    public Pelanggan getCmbMinumanPerformed(Integer id) throws PelangganException {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public List<Pelanggan> selectAllMakanan() throws PelangganException {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-//        PreparedStatement statement = null;
-//        try{
-//            statement = connection.prepareStatement(getMakananId);
-//            
-//            statement.setInt(1, id);
-//            ResultSet result = statement.executeQuery();
-//            
-//            Pelanggan pelanggan = null;
-//            if(result.next()){
-//                pelanggan = new Pelanggan();
-//                pelanggan.setHargaMakanan(result.getInt("Id"));
-////                getNamaMakanan().addItem(result.getString("nama_makanan"));
-//            }else {
-//                throw new PelangganException("Data Makanan dengan ID = " + id
-//                                            + " Tidak Ada");
-//            }
-//            return pelanggan;
-//        }catch(SQLException ex){
-//            throw new PelangganException(ex.getMessage());
-//        }
-//        finally{
-//            if(statement != null){
-//                try{
-//                    statement.close();
-//                } catch(SQLException ex){
-//                
-//                }
-//            }
-//        }
     
 
     @Override
     public List<Pelanggan> selectAllMinuman() throws PelangganException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Statement statement = null;
+        List<Pelanggan> list = new ArrayList<Pelanggan>();
+        
+        try{
+            statement = connection.createStatement();
+            ResultSet result = statement.executeQuery(selectAllMinuman);
+            
+            while(result.next()){
+                Pelanggan minuman = new Pelanggan();
+                minuman.setNamaMinuman(result.getString("nama_minuman"));
+                
+                list.add(minuman);
+            }
+            
+            return list;
+        }catch(SQLException ex){
+            throw new PelangganException(ex.getMessage());
+        }
+        finally{
+            if(statement != null){
+                try{
+                    statement.close();
+                } catch(SQLException ex){
+                    
+                }
+            }
+        }
     }
     
 }
