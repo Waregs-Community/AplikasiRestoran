@@ -1,13 +1,27 @@
 package aplikasiRestoran.kelompok6.apps.view.Admin;
 
+import aplikasiRestoran.kelompok6.apps.entity.Admin;
+import aplikasiRestoran.kelompok6.apps.event.AdminListener;
+import aplikasiRestoran.kelompok6.apps.model.AdminModel;
+import aplikasiRestoran.kelompok6.apps.model.TabelMinumanModel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
-public class DataMinumanView extends javax.swing.JFrame {
+public class DataMinumanView extends javax.swing.JFrame implements AdminListener, ListSelectionListener{
 
+    private TabelMinumanModel tabelModel;
+    private AdminModel model;
+    
     public DataMinumanView() {
+        tabelModel = new TabelMinumanModel();
+        
         initComponents();
+        tabelMinuman.setModel(tabelModel);
+        
+        this.tabelMinuman.getSelectionModel().addListSelectionListener(this);
     }
 
     public JPanel getPanelDataMinuman() {
@@ -19,7 +33,7 @@ public class DataMinumanView extends javax.swing.JFrame {
     }
 
     public JTextField getInputIHargaMinuman() {
-        return inputIHargaMinuman;
+        return inputHargaMinuman;
     }
 
     public JTextField getInputNamaMinuman() {
@@ -43,7 +57,7 @@ public class DataMinumanView extends javax.swing.JFrame {
         inputIDMinuman = new javax.swing.JTextField();
         inputNamaMinuman = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        inputIHargaMinuman = new javax.swing.JTextField();
+        inputHargaMinuman = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         btnTambahMinuman = new javax.swing.JButton();
         btnHapusMinuman = new javax.swing.JButton();
@@ -78,7 +92,7 @@ public class DataMinumanView extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Nama Minuman");
         panelInput2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 83, -1, 36));
-        panelInput2.add(inputIHargaMinuman, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 141, 224, 36));
+        panelInput2.add(inputHargaMinuman, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 141, 224, 36));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
@@ -203,8 +217,8 @@ public class DataMinumanView extends javax.swing.JFrame {
     private javax.swing.JButton btnEditMinuman;
     private javax.swing.JButton btnHapusMinuman;
     private javax.swing.JButton btnTambahMinuman;
+    private javax.swing.JTextField inputHargaMinuman;
     private javax.swing.JTextField inputIDMinuman;
-    private javax.swing.JTextField inputIHargaMinuman;
     private javax.swing.JTextField inputNamaMinuman;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel8;
@@ -214,4 +228,39 @@ public class DataMinumanView extends javax.swing.JFrame {
     private javax.swing.JPanel panelInput2;
     private javax.swing.JTable tabelMinuman;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void onChange(AdminModel admin) {
+        this.inputIDMinuman.setText(String.valueOf(admin.getId()));
+        this.inputIDMinuman.setText(admin.getNama());
+        this.inputHargaMinuman.setText(String.valueOf(admin.getHarga()));
+    }
+
+    @Override
+    public void onInsert(Admin admin) {
+        this.tabelModel.add(admin);
+    }
+
+    @Override
+    public void onUpdate(Admin admin) {
+        int index = this.tabelMinuman.getSelectedRow();
+        this.tabelModel.set(index, admin);
+    }
+
+    @Override
+    public void onDelete() {
+        int index = this.tabelMinuman.getSelectedRow();
+        this.tabelModel.remove(index);
+    }
+
+    @Override
+    public void valueChanged(ListSelectionEvent lse) {
+        try{
+            Admin admin = tabelModel.get(tabelMinuman.getSelectedRow());
+            
+            this.inputIDMinuman.setText(String.valueOf(admin.getId()));
+            this.inputIDMinuman.setText(admin.getNama());
+            this.inputHargaMinuman.setText(String.valueOf(admin.getHarga()));
+        }catch(IndexOutOfBoundsException ex){}
+    }
 }

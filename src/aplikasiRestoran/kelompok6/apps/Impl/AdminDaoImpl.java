@@ -7,18 +7,25 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 public class AdminDaoImpl implements AdminDao{
     
     private Connection connection;
-    private final String insertData = "INSERT INTO makanan VALUES (?,?,?)";
-    private final String updateData = "UPDATE makanan SET nama_makanan = ?, harga_makanan = ? where id_makanan =?";
-    private final String deleteData = "DELETE FROM makanan WHERE id_makanan = ?";
-    private final String getById = "SELECT * FROM makanan WHERE id_makanan=?";
-    private final String selectAll = "SELECT * FROM makanan";
+    private final String insertDataMakanan = "INSERT INTO makanan VALUES (?,?,?)";
+    private final String updateDataMakanan = "UPDATE makanan SET nama_makanan = ?, harga_makanan = ? where id_makanan =?";
+    private final String deleteDataMakanan = "DELETE FROM makanan WHERE id_makanan = ?";
+    private final String getByIdMakanan = "SELECT * FROM makanan WHERE id_makanan=?";
+    private final String selectAllMakanan = "SELECT * FROM makanan";
+    
+    private final String insertDataMinuman = "INSERT INTO minuman VALUES (?,?,?)";
+    private final String updateDataMinuman = "UPDATE makanan SET nama_makanan = ?, harga_makanan = ? where id_makanan =?";
+    private final String deleteDataMinuman = "DELETE FROM makanan WHERE id_makanan = ?";
+    private final String getByIdMinuman = "SELECT * FROM makanan WHERE id_makanan=?";
+    private final String selectAllMinuman = "SELECT * FROM makanan";
+    
+    private final String selectAllTransaksi = "SELECT * FROM transaksi";
     
     public AdminDaoImpl(Connection connection){
         this.connection = connection;
@@ -26,13 +33,21 @@ public class AdminDaoImpl implements AdminDao{
     
 
     @Override
-    public void insertData(Admin admin) throws AdminException {
+    public void insertData(Admin admin, String pilih) throws AdminException {
         
         PreparedStatement statement = null;
         
+        String sql = null;
+        
+        if("makanan".equals(pilih)){
+            sql = insertDataMakanan;
+        }else{
+            sql = insertDataMinuman;
+        }
+        
         try{
             connection.setAutoCommit(false);
-            statement = connection.prepareStatement(insertData);
+            statement = connection.prepareStatement(sql);
             statement.setInt(1, admin.getId());
             statement.setString(2, admin.getNama());
             statement.setInt(3, admin.getHarga());
@@ -63,12 +78,20 @@ public class AdminDaoImpl implements AdminDao{
     }
 
     @Override
-    public void updateData(Admin admin) throws AdminException {
+    public void updateData(Admin admin, String pilih) throws AdminException {
         PreparedStatement statement = null;
+        
+        String sql = null;
+        
+        if("makanan".equals(pilih)){
+            sql = updateDataMakanan;
+        }else{
+            sql = updateDataMinuman;
+        }
         
         try{
             connection.setAutoCommit(false);
-            statement = connection.prepareStatement(updateData);
+            statement = connection.prepareStatement(sql);
             statement.setString(1, admin.getNama());
             statement.setInt(2, admin.getHarga());
             statement.setInt(3,admin.getId() );
@@ -93,13 +116,21 @@ public class AdminDaoImpl implements AdminDao{
     }
 
     @Override
-    public void deleteData(int id) throws AdminException {
+    public void deleteData(int id, String pilih) throws AdminException {
         
         PreparedStatement statement = null;
         
+        String sql = null;
+        
+        if("makanan".equals(pilih)){
+            sql = deleteDataMakanan;
+        }else{
+            sql = deleteDataMinuman;
+        }
+        
         try{
             connection.setAutoCommit(false);
-            statement = connection.prepareStatement(deleteData);
+            statement = connection.prepareStatement(sql);
             statement.setInt(1, id);
             statement.executeUpdate();
             connection.commit();
@@ -126,12 +157,20 @@ public class AdminDaoImpl implements AdminDao{
     }
 
     @Override
-    public Admin getDataId(int id) throws AdminException {
+    public Admin getDataId(int id, String pilih) throws AdminException {
         PreparedStatement statement = null;
+        
+        String sql = null;
+        
+        if("makanan".equals(pilih)){
+            sql = getByIdMakanan;
+        }else{
+            sql = getByIdMinuman;
+        }
         
         try{
             connection.setAutoCommit(false);
-            statement = connection.prepareStatement(getById);
+            statement = connection.prepareStatement(sql);
             statement.setInt(1, id);
             ResultSet result = statement.executeQuery();
             
@@ -171,14 +210,23 @@ public class AdminDaoImpl implements AdminDao{
     }
 
     @Override
-    public List<Admin> selectAllData() throws AdminException {
+    public List<Admin> selectAllData(String pilih) throws AdminException {
         
         PreparedStatement statement = null;
+        String sql = null;
+        
+        if("makanan".equals(pilih)){
+            sql = selectAllMakanan;
+        }else if("minuman".equals(pilih)){
+            sql = selectAllMinuman;
+        }else{
+            sql = selectAllTransaksi;
+        }
         List<Admin> list = new ArrayList<Admin>();
         
         try{
             connection.setAutoCommit(false);
-            statement = connection.prepareStatement(selectAll);
+            statement = connection.prepareStatement(sql);
             ResultSet result = statement.executeQuery();
             
             while(result.next()){

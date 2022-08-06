@@ -6,11 +6,11 @@ import java.util.List;
 
 public interface AdminDao {
     
-    public void insertData(Admin admin) throws AdminException;
-    public void updateData(Admin admin) throws AdminException;
-    public void deleteData(int id) throws AdminException;
-    public Admin getDataId(int id) throws AdminException;
-    public List<Admin> selectAllData() throws AdminException;
+    public void insertData(Admin admin, String pilih) throws AdminException;
+    public void updateData(Admin admin, String pilih) throws AdminException;
+    public void deleteData(int id, String pilih) throws AdminException;
+    public Admin getDataId(int id, String pilih) throws AdminException;
+    public List<Admin> selectAllData(String pilih) throws AdminException;
     
     
 }

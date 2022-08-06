@@ -1,13 +1,42 @@
 package aplikasiRestoran.kelompok6.apps.view.Admin;
 
+import aplikasiRestoran.kelompok6.apps.controller.MakananController;
+import aplikasiRestoran.kelompok6.apps.database.AplikasiRestoranDB;
+import aplikasiRestoran.kelompok6.apps.entity.Admin;
+import aplikasiRestoran.kelompok6.apps.event.AdminListener;
+import aplikasiRestoran.kelompok6.apps.exception.AdminException;
+import aplikasiRestoran.kelompok6.apps.model.AdminModel;
+import aplikasiRestoran.kelompok6.apps.model.TabelMakananModel;
+import aplikasiRestoran.kelompok6.apps.service.AdminDao;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
-public class DataMakananView extends javax.swing.JFrame {
+public class DataMakananView extends javax.swing.JFrame implements AdminListener, ListSelectionListener {
 
+    private TabelMakananModel tabelModel;
+    private AdminModel model;
+    private MakananController controller;
+    
+            
     public DataMakananView() {
+        tabelModel = new TabelMakananModel();
+        
+        
+        model = new AdminModel();
+        model.setListener(this);
+        
+        controller = new MakananController();
+        controller.setModel(model);
+        
         initComponents();
+        tabelMakanan.setModel(tabelModel);
+        this.tabelMakanan.getSelectionModel().addListSelectionListener(this);
     }
 
     public JPanel getPanelDataMakanan() {
@@ -18,8 +47,8 @@ public class DataMakananView extends javax.swing.JFrame {
         return inputIDMakanan;
     }
 
-    public JTextField getInputIHargaMakanan() {
-        return inputIHargaMakanan;
+    public JTextField getInputHargaMakanan() {
+        return inputHargaMakanan;
     }
 
     public JTextField getInputNamaMakanan() {
@@ -43,7 +72,7 @@ public class DataMakananView extends javax.swing.JFrame {
         inputIDMakanan = new javax.swing.JTextField();
         inputNamaMakanan = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        inputIHargaMakanan = new javax.swing.JTextField();
+        inputHargaMakanan = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         btnTambahMakanan = new javax.swing.JButton();
         btnHapusMakanan = new javax.swing.JButton();
@@ -78,7 +107,7 @@ public class DataMakananView extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Nama Makanan");
         panelInput.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 83, -1, 36));
-        panelInput.add(inputIHargaMakanan, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 141, 224, 36));
+        panelInput.add(inputHargaMakanan, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 141, 224, 36));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -88,11 +117,21 @@ public class DataMakananView extends javax.swing.JFrame {
         btnTambahMakanan.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnTambahMakanan.setText("Tambah");
         btnTambahMakanan.setPreferredSize(new java.awt.Dimension(110, 40));
+        btnTambahMakanan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnTambahMakananMouseClicked(evt);
+            }
+        });
         panelInput.add(btnTambahMakanan, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 195, -1, -1));
 
         btnHapusMakanan.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnHapusMakanan.setText("Hapus");
         btnHapusMakanan.setPreferredSize(new java.awt.Dimension(110, 40));
+        btnHapusMakanan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnHapusMakananMouseClicked(evt);
+            }
+        });
         btnHapusMakanan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHapusMakananActionPerformed(evt);
@@ -103,6 +142,11 @@ public class DataMakananView extends javax.swing.JFrame {
         btnEditMakanan.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnEditMakanan.setText("Edit");
         btnEditMakanan.setPreferredSize(new java.awt.Dimension(110, 40));
+        btnEditMakanan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEditMakananMouseClicked(evt);
+            }
+        });
         panelInput.add(btnEditMakanan, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 195, -1, -1));
 
         panelDataMakanan.add(panelInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 390, 260));
@@ -167,37 +211,41 @@ public class DataMakananView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnHapusMakananActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+    private void btnTambahMakananMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTambahMakananMouseClicked
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DataMakananView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DataMakananView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DataMakananView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DataMakananView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            controller.insertData(this);
+        } catch (SQLException | AdminException ex) {
+            Logger.getLogger(DataMakananView.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //</editor-fold>
+    }//GEN-LAST:event_btnTambahMakananMouseClicked
 
-        /* Create and display the form */
+    private void btnEditMakananMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditMakananMouseClicked
+        try {
+            controller.updateData(this);
+        } catch (SQLException | AdminException ex) {
+            Logger.getLogger(DataMakananView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnEditMakananMouseClicked
+
+    private void btnHapusMakananMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHapusMakananMouseClicked
+        try {
+            controller.deleteData(this);
+        } catch (SQLException | AdminException ex) {
+            Logger.getLogger(DataMakananView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnHapusMakananMouseClicked
+
+    public static void main(String args[]) {
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DataMakananView().setVisible(true);
+                try{
+                    DataMakananView view = new DataMakananView();
+                    view.loadDatabase();
+                    view.setVisible(true);
+                }catch (SQLException | AdminException ex) {
+                    Logger.getLogger(DataMakananView.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -207,8 +255,8 @@ public class DataMakananView extends javax.swing.JFrame {
     private javax.swing.JButton btnEditMakanan;
     private javax.swing.JButton btnHapusMakanan;
     private javax.swing.JButton btnTambahMakanan;
+    private javax.swing.JTextField inputHargaMakanan;
     private javax.swing.JTextField inputIDMakanan;
-    private javax.swing.JTextField inputIHargaMakanan;
     private javax.swing.JTextField inputNamaMakanan;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -218,4 +266,44 @@ public class DataMakananView extends javax.swing.JFrame {
     private javax.swing.JPanel panelInput;
     private javax.swing.JTable tabelMakanan;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void onChange(AdminModel admin) {
+        this.inputIDMakanan.setText(String.valueOf(admin.getId()));
+        this.inputNamaMakanan.setText(admin.getNama());
+        this.inputHargaMakanan.setText(String.valueOf(admin.getHarga()));
+    }
+
+    @Override
+    public void onInsert(Admin admin) {
+        this.tabelModel.add(admin);
+    }
+
+    @Override
+    public void onUpdate(Admin admin) {
+        int index = this.tabelMakanan.getSelectedRow();
+        this.tabelModel.set(index, admin);
+    }
+
+    @Override
+    public void onDelete() {
+        int index = this.tabelMakanan.getSelectedRow();
+        this.tabelModel.remove(index);
+    }
+
+    @Override
+    public void valueChanged(ListSelectionEvent lse) {
+        try{
+            Admin admin = tabelModel.get(tabelMakanan.getSelectedRow());
+            
+            this.inputIDMakanan.setText(String.valueOf(admin.getId()));
+            this.inputNamaMakanan.setText(admin.getNama());
+            this.inputHargaMakanan.setText(String.valueOf(admin.getHarga()));
+        }catch(IndexOutOfBoundsException ex){}
+    }
+    
+    public void loadDatabase() throws SQLException, AdminException{
+        AdminDao dao = AplikasiRestoranDB.getData();
+        this.tabelModel.setList(dao.selectAllData("makanan"));
+    }
 }
