@@ -95,7 +95,7 @@ public class AdminView extends javax.swing.JFrame {
         panelMenu.setPreferredSize(new java.awt.Dimension(200, 590));
         panelMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        iconBrand.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aplikasiRestoran/kelompok6/apps/icon/brand_126 x116.png"))); // NOI18N
+        iconBrand.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aplikasiRestoran/kelompok6/apps/asset/brand_126 x116.png"))); // NOI18N
         panelMenu.add(iconBrand, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 70, -1, -1));
 
         btnDataMakanan.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
