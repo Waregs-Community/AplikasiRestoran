@@ -20,10 +20,10 @@ public class AdminDaoImpl implements AdminDao{
     private final String selectAllMakanan = "SELECT * FROM makanan";
     
     private final String insertDataMinuman = "INSERT INTO minuman VALUES (?,?,?)";
-    private final String updateDataMinuman = "UPDATE makanan SET nama_makanan = ?, harga_makanan = ? where id_makanan =?";
-    private final String deleteDataMinuman = "DELETE FROM makanan WHERE id_makanan = ?";
-    private final String getByIdMinuman = "SELECT * FROM makanan WHERE id_makanan=?";
-    private final String selectAllMinuman = "SELECT * FROM makanan";
+    private final String updateDataMinuman = "UPDATE minuman SET nama_minuman = ?, harga_minuman = ? where id_minuman =?";
+    private final String deleteDataMinuman = "DELETE FROM minuman WHERE id_minuman = ?";
+    private final String getByIdMinuman = "SELECT * FROM minuman WHERE id_minuman=?";
+    private final String selectAllMinuman = "SELECT * FROM minuman";
     
     private final String selectAllTransaksi = "SELECT * FROM transaksi";
     
@@ -179,9 +179,9 @@ public class AdminDaoImpl implements AdminDao{
             if(result.next()){
                 
                 admin = new Admin();
-                admin.setId(result.getInt("id_makanan"));
-                admin.setNama(result.getString("nama_makanan"));
-                admin.setHarga(result.getInt("harga_makanan"));
+                admin.setId(result.getInt("id_"+pilih));
+                admin.setNama(result.getString("nama_"+pilih));
+                admin.setHarga(result.getInt("harga_"+pilih));
             }else{
                 throw new AdminException("Data Anggota dengan ID = " + id+ " Tidak Ditemukan Didalam Database.");
             }
@@ -231,9 +231,9 @@ public class AdminDaoImpl implements AdminDao{
             
             while(result.next()){
                 Admin admin = new Admin();
-                admin.setId(result.getInt("id_makanan"));
-                admin.setNama(result.getString("nama_makanan"));
-                admin.setHarga(result.getInt("harga_makanan"));
+                admin.setId(result.getInt("id_"+pilih));
+                admin.setNama(result.getString("nama_"+pilih));
+                admin.setHarga(result.getInt("harga_"+pilih));
                 
                 list.add(admin);
             }

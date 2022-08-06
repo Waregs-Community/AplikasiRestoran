@@ -1,9 +1,16 @@
 package aplikasiRestoran.kelompok6.apps.view.Admin;
 
+import aplikasiRestoran.kelompok6.apps.controller.MinumanController;
+import aplikasiRestoran.kelompok6.apps.database.AplikasiRestoranDB;
 import aplikasiRestoran.kelompok6.apps.entity.Admin;
 import aplikasiRestoran.kelompok6.apps.event.AdminListener;
+import aplikasiRestoran.kelompok6.apps.exception.AdminException;
 import aplikasiRestoran.kelompok6.apps.model.AdminModel;
 import aplikasiRestoran.kelompok6.apps.model.TabelMinumanModel;
+import aplikasiRestoran.kelompok6.apps.service.AdminDao;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -14,14 +21,25 @@ public class DataMinumanView extends javax.swing.JFrame implements AdminListener
 
     private TabelMinumanModel tabelModel;
     private AdminModel model;
+    private MinumanController controller;
     
     public DataMinumanView() {
         tabelModel = new TabelMinumanModel();
         
+        model = new AdminModel("minuman");
+        model.setListener(this);
+        
+        controller = new MinumanController();
+        controller.setModel(model);
+        
         initComponents();
         tabelMinuman.setModel(tabelModel);
-        
         this.tabelMinuman.getSelectionModel().addListSelectionListener(this);
+        try {
+            this.loadDatabase();
+        } catch (SQLException | AdminException ex) {
+            Logger.getLogger(DataMinumanView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public JPanel getPanelDataMinuman() {
@@ -32,7 +50,7 @@ public class DataMinumanView extends javax.swing.JFrame implements AdminListener
         return inputIDMinuman;
     }
 
-    public JTextField getInputIHargaMinuman() {
+    public JTextField getInputHargaMinuman() {
         return inputHargaMinuman;
     }
 
@@ -102,11 +120,21 @@ public class DataMinumanView extends javax.swing.JFrame implements AdminListener
         btnTambahMinuman.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnTambahMinuman.setText("Tambah");
         btnTambahMinuman.setPreferredSize(new java.awt.Dimension(110, 40));
+        btnTambahMinuman.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnTambahMinumanMouseClicked(evt);
+            }
+        });
         panelInput2.add(btnTambahMinuman, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 195, -1, -1));
 
         btnHapusMinuman.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnHapusMinuman.setText("Hapus");
         btnHapusMinuman.setPreferredSize(new java.awt.Dimension(110, 40));
+        btnHapusMinuman.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnHapusMinumanMouseClicked(evt);
+            }
+        });
         btnHapusMinuman.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHapusMinumanActionPerformed(evt);
@@ -117,6 +145,11 @@ public class DataMinumanView extends javax.swing.JFrame implements AdminListener
         btnEditMinuman.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnEditMinuman.setText("Edit");
         btnEditMinuman.setPreferredSize(new java.awt.Dimension(110, 40));
+        btnEditMinuman.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEditMinumanMouseClicked(evt);
+            }
+        });
         panelInput2.add(btnEditMinuman, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 195, -1, -1));
 
         panelDataMinuman.add(panelInput2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 390, 260));
@@ -176,6 +209,34 @@ public class DataMinumanView extends javax.swing.JFrame implements AdminListener
         // TODO add your handling code here:
     }//GEN-LAST:event_btnHapusMinumanActionPerformed
 
+    private void btnTambahMinumanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTambahMinumanMouseClicked
+        try {
+            controller.insertData(this);
+        } catch (SQLException | AdminException ex) {
+            Logger.getLogger(DataMinumanView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnTambahMinumanMouseClicked
+
+    private void btnEditMinumanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditMinumanMouseClicked
+        try {
+            controller.updateData(this);
+        } catch (SQLException ex) {
+            Logger.getLogger(DataMinumanView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (AdminException ex) {
+            Logger.getLogger(DataMinumanView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnEditMinumanMouseClicked
+
+    private void btnHapusMinumanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHapusMinumanMouseClicked
+        try {
+            controller.deleteData(this);
+        } catch (SQLException ex) {
+            Logger.getLogger(DataMinumanView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (AdminException ex) {
+            Logger.getLogger(DataMinumanView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnHapusMinumanMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -232,7 +293,7 @@ public class DataMinumanView extends javax.swing.JFrame implements AdminListener
     @Override
     public void onChange(AdminModel admin) {
         this.inputIDMinuman.setText(String.valueOf(admin.getId()));
-        this.inputIDMinuman.setText(admin.getNama());
+        this.inputNamaMinuman.setText(admin.getNama());
         this.inputHargaMinuman.setText(String.valueOf(admin.getHarga()));
     }
 
@@ -259,8 +320,13 @@ public class DataMinumanView extends javax.swing.JFrame implements AdminListener
             Admin admin = tabelModel.get(tabelMinuman.getSelectedRow());
             
             this.inputIDMinuman.setText(String.valueOf(admin.getId()));
-            this.inputIDMinuman.setText(admin.getNama());
+            this.inputNamaMinuman.setText(admin.getNama());
             this.inputHargaMinuman.setText(String.valueOf(admin.getHarga()));
         }catch(IndexOutOfBoundsException ex){}
+    }
+    
+    public void loadDatabase() throws SQLException, AdminException{
+        AdminDao dao = AplikasiRestoranDB.getData();
+        this.tabelModel.setList(dao.selectAllData("minuman"));
     }
 }

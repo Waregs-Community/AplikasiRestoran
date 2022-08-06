@@ -27,8 +27,7 @@ public class DataMakananView extends javax.swing.JFrame implements AdminListener
     public DataMakananView() {
         tabelModel = new TabelMakananModel();
         
-        
-        model = new AdminModel();
+        model = new AdminModel("makanan");
         model.setListener(this);
         
         controller = new MakananController();
@@ -37,6 +36,11 @@ public class DataMakananView extends javax.swing.JFrame implements AdminListener
         initComponents();
         tabelMakanan.setModel(tabelModel);
         this.tabelMakanan.getSelectionModel().addListSelectionListener(this);
+        try {
+            this.loadDatabase();
+        } catch (SQLException | AdminException ex) {
+            Logger.getLogger(DataMakananView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public JPanel getPanelDataMakanan() {
@@ -239,13 +243,7 @@ public class DataMakananView extends javax.swing.JFrame implements AdminListener
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                try{
-                    DataMakananView view = new DataMakananView();
-                    view.loadDatabase();
-                    view.setVisible(true);
-                }catch (SQLException | AdminException ex) {
-                    Logger.getLogger(DataMakananView.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                new DataMakananView().setVisible(true);
             }
         });
     }

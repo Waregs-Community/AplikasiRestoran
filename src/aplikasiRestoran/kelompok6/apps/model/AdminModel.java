@@ -12,8 +12,15 @@ public class AdminModel {
     private int id;
     private String nama;
     private int harga;
+    private String pilih;
     private AdminListener listener;
 
+    public AdminModel(){}
+    
+    public AdminModel(String pilih){
+        this.pilih = pilih;
+    }
+    
     public AdminListener getListener() {
         return listener;
     }
@@ -80,7 +87,7 @@ public class AdminModel {
         admin.setNama(this.nama);
         admin.setHarga(this.harga);
         
-        dao.insertData(admin, "makanan");
+        dao.insertData(admin, pilih);
         this.fireOnInsert(admin);
     }
     
@@ -92,13 +99,13 @@ public class AdminModel {
         admin.setNama(this.nama);
         admin.setHarga(this.harga);
         
-        dao.updateData(admin, "makanan");
+        dao.updateData(admin, pilih);
         this.fireOnUpdate(admin);
     }
     
     public void deleteData() throws SQLException, AdminException{
         AdminDao dao = AplikasiRestoranDB.getData();
-        dao.deleteData(id, "makanan");
+        dao.deleteData(id, pilih);
         this.fireOnDelete();
     }
     
