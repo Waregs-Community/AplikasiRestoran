@@ -16,7 +16,6 @@ public class Pelanggan {
     private String namaPemesan;
     private int totalHarga;
 
-
     public int getIdMakanan() {
         return idMakanan;
     }

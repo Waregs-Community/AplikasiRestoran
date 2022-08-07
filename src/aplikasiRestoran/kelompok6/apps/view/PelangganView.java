@@ -1,16 +1,31 @@
    package aplikasiRestoran.kelompok6.apps.view;
 
+import aplikasiRestoran.kelompok6.apps.Impl.PelangganDaoImpl;
 import aplikasiRestoran.kelompok6.apps.controller.PelangganController;
+import aplikasiRestoran.kelompok6.apps.database.AplikasiRestoranDB;
+import static aplikasiRestoran.kelompok6.apps.database.AplikasiRestoranDB.getConnection;
+import aplikasiRestoran.kelompok6.apps.entity.Pelanggan;
 import aplikasiRestoran.kelompok6.apps.event.PelangganListener;
+import aplikasiRestoran.kelompok6.apps.exception.PelangganException;
 import aplikasiRestoran.kelompok6.apps.model.PelangganModel;
+import aplikasiRestoran.kelompok6.apps.service.PelangganDao;
+import java.sql.Connection;
+import static java.sql.DriverManager.getConnection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class PelangganView extends javax.swing.JFrame implements PelangganListener {
 
     private PelangganModel model;
     private PelangganController controller;
+    private PelangganDaoImpl daoImpl;
     
     
-    public PelangganView() {
+    public PelangganView() throws PelangganException, SQLException {
         model = new PelangganModel();
         controller = new PelangganController();
         
@@ -18,6 +33,10 @@ public class PelangganView extends javax.swing.JFrame implements PelangganListen
         controller.setModel(model);
         
         initComponents();
+        
+//        controller.tampilCmbMakanan(this);
+        tampilCmbMakanan();
+        tampilCmbMinuman();
     }
     
     public javax.swing.JComboBox<String> getCmbMakanan() {
@@ -174,12 +193,12 @@ public class PelangganView extends javax.swing.JFrame implements PelangganListen
         lblMakanan.setPreferredSize(new java.awt.Dimension(119, 32));
         panelPesan.add(lblMakanan, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, -1, -1));
 
-        cmbMakanan.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        cmbMakanan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pilih Makanan" }));
+        cmbMakanan.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        cmbMakanan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "      -- PILIH MAKANAN --" }));
         panelPesan.add(cmbMakanan, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 170, 40));
 
-        cmbMinuman.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        cmbMinuman.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pilih Minuman" }));
+        cmbMinuman.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        cmbMinuman.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "      -- PILIH MINUMAN --" }));
         panelPesan.add(cmbMinuman, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 60, 170, 40));
 
         txtHargaMinuman.setEditable(false);
@@ -265,7 +284,41 @@ public class PelangganView extends javax.swing.JFrame implements PelangganListen
     private void btnResetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnResetMouseClicked
         controller.resetPesanan(this);
     }//GEN-LAST:event_btnResetMouseClicked
-
+    
+    public void tampilCmbMakanan(){
+        try {
+            Connection con = new AplikasiRestoranDB().getConnection();
+            String sql = "SELECT * FROM makanan ";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()){
+                getCmbMakanan().addItem(rs.getString("nama_makanan"));
+            }
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+            
+        }
+    }
+        
+    public void tampilCmbMinuman(){
+        try {
+            Connection con = new AplikasiRestoranDB().getConnection();
+            String sql = "SELECT * FROM minuman ";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()){
+                getCmbMinuman().addItem(rs.getString("nama_minuman"));
+            }
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+            
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -296,7 +349,13 @@ public class PelangganView extends javax.swing.JFrame implements PelangganListen
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PelangganView().setVisible(true);
+                try {
+                    new PelangganView().setVisible(true);
+                } catch (PelangganException ex) {
+                    Logger.getLogger(PelangganView.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(PelangganView.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -338,9 +397,13 @@ public class PelangganView extends javax.swing.JFrame implements PelangganListen
 
     @Override
     public void onChange(PelangganModel pelanggan) {
-//        this.txtNamaPemesan.setText(model.getNamaPemesan());
-//        this.cmbMakanan.setSelectedItem(model.getNamaMakanan());
-//        this.cmbMinuman.setSelectedItem(model.getNamaMinuman());
-//        this.txtHargaMakanan(String.valueOf(model.getHargaMakanan())) kenapa gabisa mulu
+        
+        
     }
+
+    @Override
+    public void onInsert(Pelanggan pelanggan) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

@@ -1,7 +1,14 @@
 package aplikasiRestoran.kelompok6.apps.model;
 
+import aplikasiRestoran.kelompok6.apps.Impl.PelangganDaoImpl;
+import aplikasiRestoran.kelompok6.apps.database.AplikasiRestoranDB;
+import aplikasiRestoran.kelompok6.apps.entity.Pelanggan;
 import aplikasiRestoran.kelompok6.apps.event.PelangganListener;
+import aplikasiRestoran.kelompok6.apps.exception.PelangganException;
+import aplikasiRestoran.kelompok6.apps.service.PelangganDao;
 import aplikasiRestoran.kelompok6.apps.view.PelangganView;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 
 public class PelangganModel {
@@ -14,7 +21,7 @@ public class PelangganModel {
     private int qtyMinuman;
     private int totalHarga;
     private PelangganListener pelangganListener;
-
+    
 
     public String getNamaPemesan() {
         return namaPemesan;
@@ -77,17 +84,30 @@ public class PelangganModel {
     }
     public void setPelangganListener(PelangganListener pelangganListener) {
         this.pelangganListener = pelangganListener;
-        this.fireOnchange();
+        this.fireOnChange();
     }
     
-    protected void fireOnchange(){
+    
+    protected void fireOnChange(){
         if(getPelangganListener() != null){
             this.getPelangganListener().onChange(this);
         }
     }
     
-    public void kirimPesanan(){
+    protected void fireOnInsert(Pelanggan pelanggan){
+        if(pelangganListener != null){
+            pelangganListener.onInsert(pelanggan);
+            this.fireOnChange();
+        }
+    }
     
+    public void kirimPesanan(PelangganView view) throws SQLException, PelangganException{
+        PelangganDao dao = AplikasiRestoranDB.getDataPesanan();
+        Pelanggan pelanggan = new Pelanggan();
+        
+        dao.insertPesanan(pelanggan);
+        JOptionPane.showMessageDialog(null, "Silahkan bayar Ke Kasir");
+        this.fireOnInsert(pelanggan);
     }
     
     public void resetPesanan(PelangganView view){

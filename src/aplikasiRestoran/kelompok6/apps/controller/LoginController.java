@@ -1,9 +1,11 @@
 package aplikasiRestoran.kelompok6.apps.controller;
 
+import aplikasiRestoran.kelompok6.apps.exception.PelangganException;
 import aplikasiRestoran.kelompok6.apps.model.LoginModel;
 import aplikasiRestoran.kelompok6.apps.view.LoginView;
 import aplikasiRestoran.kelompok6.apps.view.PelangganView;
 import aplikasiRestoran.kelompok6.apps.view.PilihLoginView;
+import java.sql.SQLException;
 
 
 public class LoginController {
@@ -49,7 +51,7 @@ public class LoginController {
     }
     
    
-    public void tampilPelangganView(){
+    public void tampilPelangganView() throws PelangganException, SQLException{
         PelangganView tampil = new PelangganView();
         tampil.setVisible(true);
         

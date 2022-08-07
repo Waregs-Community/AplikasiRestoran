@@ -1,8 +1,10 @@
 package aplikasiRestoran.kelompok6.apps.Impl;
 
+import aplikasiRestoran.kelompok6.apps.database.AplikasiRestoranDB;
 import aplikasiRestoran.kelompok6.apps.entity.Pelanggan;
 import aplikasiRestoran.kelompok6.apps.exception.PelangganException;
 import aplikasiRestoran.kelompok6.apps.service.PelangganDao;
+import aplikasiRestoran.kelompok6.apps.view.PelangganView;
 import com.mysql.jdbc.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,10 +12,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
 
 public class PelangganDaoImpl implements PelangganDao{
     
+    private PelangganView view;
     private Connection connection;
     private final String insertPesanan = "INSERT INTO transaksi"
                                         + "(nama_pelanggan, id_makanan,harga_makanan,total_makanan, id_minuman,harga_minuman,total_minuman,total_bayar)"
@@ -25,71 +27,6 @@ public class PelangganDaoImpl implements PelangganDao{
     
     public PelangganDaoImpl(Connection connection){
         this.connection = connection;
-    }
-    
-
-    //Method utk menampilkan data makanan pada comboBox
-    @Override
-    public List<Pelanggan> selectAllMakanan() throws PelangganException {
-        Statement statement = null;
-        List<Pelanggan> list = new ArrayList<Pelanggan>();
-        
-        try{
-            statement = connection.createStatement();
-            ResultSet result = statement.executeQuery(selectAllMakanan);
-            
-            while(result.next()){
-                Pelanggan makanan = new Pelanggan();
-                makanan.setNamaMakanan(result.getString("nama_makanan"));
-                
-                list.add(makanan);
-            }
-            
-            return list;
-        }catch(SQLException ex){
-            throw new PelangganException(ex.getMessage());
-        }
-        finally{
-            if(statement != null){
-                try{
-                    statement.close();
-                } catch(SQLException ex){
-
-                }
-            }
-        }
-    }
-    
-    //Method utk menampilkan data minuman pada comboBox
-    @Override
-    public List<Pelanggan> selectAllMinuman() throws PelangganException {
-        Statement statement = null;
-        List<Pelanggan> list = new ArrayList<Pelanggan>();
-        
-        try{
-            statement = connection.createStatement();
-            ResultSet result = statement.executeQuery(selectAllMinuman);
-            
-            while(result.next()){
-                Pelanggan minuman = new Pelanggan();
-                minuman.setNamaMinuman(result.getString("nama_minuman"));
-                
-                list.add(minuman);
-            }
-            
-            return list;
-        }catch(SQLException ex){
-            throw new PelangganException(ex.getMessage());
-        }
-        finally{
-            if(statement != null){
-                try{
-                    statement.close();
-                } catch(SQLException ex){
-                    
-                }
-            }
-        }
     }
     
     //Method utk menampilkan harga makanan by id

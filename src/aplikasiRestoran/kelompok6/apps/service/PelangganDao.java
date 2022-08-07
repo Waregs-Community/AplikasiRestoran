@@ -12,9 +12,4 @@ public interface PelangganDao {
     
     public Pelanggan getHMinumanById(Integer id) throws PelangganException;
     
-    public List<Pelanggan> selectAllMakanan() throws PelangganException;
-    
-    public List<Pelanggan> selectAllMinuman() throws PelangganException;
-    
-    
 }
