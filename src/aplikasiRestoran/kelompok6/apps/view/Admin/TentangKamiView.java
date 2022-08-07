@@ -43,7 +43,6 @@ public class TentangKamiView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(192, 57, 42));
-        setPreferredSize(new java.awt.Dimension(1051, 586));
 
         panelTentangKami.setBackground(new java.awt.Color(192, 57, 42));
         panelTentangKami.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -61,12 +60,12 @@ public class TentangKamiView extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setText("Kelompok 6");
+        jLabel9.setText("Kelompokasdasda 6");
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setText("<html>  \n<p>10121206 - Naufal Atsari Sobur\n<p>10121216 - Hani Agustina \n<p>10121221 - Luthfi Dhiya Ramadhan \n<p>10121225 - Nurul Dini Kamilah \n<p>10121237 - Mujahid Fathul Rabbani\n<p>10121242 - Fajar Wahyu Gumelar\n</html>");
+        jLabel11.setText("<html>   <p>10121206 - Naufal Atsari Sobur <p>10121216 - Hani Agustina  <p>10121221 - Luthfi Dhiya Ramadhan  <p>10121225 - Nurul Dini Kamilah  <p>10121237 - Mujahid Fathul Rabbani <p>10121242 - Fajar Wahyu Gumelar </html>");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -75,8 +74,10 @@ public class TentangKamiView extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 916, Short.MAX_VALUE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 916, Short.MAX_VALUE)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 775, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -84,8 +85,8 @@ public class TentangKamiView extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jLabel9)
-                .addGap(29, 29, 29)
-                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(105, 105, 105)
+                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
