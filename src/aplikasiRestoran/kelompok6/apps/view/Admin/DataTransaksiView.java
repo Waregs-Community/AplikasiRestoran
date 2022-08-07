@@ -1,14 +1,34 @@
 package aplikasiRestoran.kelompok6.apps.view.Admin;
 
+import aplikasiRestoran.kelompok6.apps.database.AplikasiRestoranDB;
+import aplikasiRestoran.kelompok6.apps.exception.AdminException;
+import aplikasiRestoran.kelompok6.apps.model.TabelTransaksiModel;
+import aplikasiRestoran.kelompok6.apps.service.AdminDao;
+import java.io.File;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class DataTransaksiView extends javax.swing.JFrame {
 
-    /**
-     * Creates new form DataMakananView
-     */
+    private TabelTransaksiModel tabelModel;
+    
     public DataTransaksiView() {
+        tabelModel = new TabelTransaksiModel();
+        
         initComponents();
+        tabelTransaksi.setModel(tabelModel);
+        try {
+            this.loadDatabase();
+        } catch (SQLException | AdminException ex) {
+            Logger.getLogger(DataTransaksiView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public JPanel getPanelDataTransaksi() {
@@ -23,8 +43,8 @@ public class DataTransaksiView extends javax.swing.JFrame {
         panelDataTransaksi = new javax.swing.JPanel();
         Title2 = new javax.swing.JLabel();
         jScrollPane7 = new javax.swing.JScrollPane();
-        tableTransaksi = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        tabelTransaksi = new javax.swing.JTable();
+        btnCetakLaporan = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(192, 57, 42));
@@ -41,7 +61,7 @@ public class DataTransaksiView extends javax.swing.JFrame {
         Title2.setText("Data Transaksi");
         panelDataTransaksi.add(Title2, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 40, 410, -1));
 
-        tableTransaksi.setModel(new javax.swing.table.DefaultTableModel(
+        tabelTransaksi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null},
@@ -88,14 +108,19 @@ public class DataTransaksiView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane7.setViewportView(tableTransaksi);
+        jScrollPane7.setViewportView(tabelTransaksi);
 
         panelDataTransaksi.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 1000, 410));
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aplikasiRestoran/kelompok6/apps/asset/print.png"))); // NOI18N
-        jButton1.setText("Cetak");
-        panelDataTransaksi.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 540, 100, 40));
+        btnCetakLaporan.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnCetakLaporan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aplikasiRestoran/kelompok6/apps/asset/print.png"))); // NOI18N
+        btnCetakLaporan.setText("Cetak Laporan");
+        btnCetakLaporan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCetakLaporanMouseClicked(evt);
+            }
+        });
+        panelDataTransaksi.add(btnCetakLaporan, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 540, 160, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -110,6 +135,16 @@ public class DataTransaksiView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCetakLaporanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCetakLaporanMouseClicked
+        try{
+            File namafile = new File("src/aplikasiRestoran/kelompok6/laporan/LaporanTransaksi.jasper");
+            JasperPrint jp = JasperFillManager.fillReport(namafile.getPath(), null, AplikasiRestoranDB.getConnection());
+            JasperViewer.viewReport(jp, false);
+        }catch(Exception x){
+            JOptionPane.showMessageDialog(null, x.getMessage());
+        }
+    }//GEN-LAST:event_btnCetakLaporanMouseClicked
 
     /**
      * @param args the command line arguments
@@ -149,9 +184,14 @@ public class DataTransaksiView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Title2;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnCetakLaporan;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JPanel panelDataTransaksi;
-    private javax.swing.JTable tableTransaksi;
+    private javax.swing.JTable tabelTransaksi;
     // End of variables declaration//GEN-END:variables
+    public void loadDatabase() throws SQLException, AdminException{
+        AdminDao dao = AplikasiRestoranDB.getData();
+        this.tabelModel.setList(dao.selectAllTransaksi());
+    }
+
 }

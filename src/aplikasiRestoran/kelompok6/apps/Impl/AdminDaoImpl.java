@@ -1,6 +1,8 @@
 package aplikasiRestoran.kelompok6.apps.Impl;
 
 import aplikasiRestoran.kelompok6.apps.entity.Admin;
+import aplikasiRestoran.kelompok6.apps.entity.Home;
+import aplikasiRestoran.kelompok6.apps.entity.Transaksi;
 import aplikasiRestoran.kelompok6.apps.exception.AdminException;
 import aplikasiRestoran.kelompok6.apps.service.AdminDao;
 import java.sql.Connection;
@@ -25,7 +27,8 @@ public class AdminDaoImpl implements AdminDao{
     private final String getByIdMinuman = "SELECT * FROM minuman WHERE id_minuman=?";
     private final String selectAllMinuman = "SELECT * FROM minuman";
     
-    private final String selectAllTransaksi = "SELECT * FROM transaksi";
+    private final String selectDataForHome = "SELECT (SELECT count(*) FROM makanan)+(SELECT count(*) FROM minuman) as total_semuabarang, COUNT(*) AS total_transaksi, SUM(total_bayar) AS total_penghasilan FROM transaksi;";
+    private final String selectAllTransaksi = "SELECT transaksi.*, makanan.nama_makanan, minuman.nama_minuman, makanan.harga_makanan, minuman.harga_minuman FROM transaksi INNER JOIN makanan ON transaksi.id_makanan = makanan.id_makanan INNER JOIN minuman ON transaksi.id_minuman = minuman.id_minuman";
     
     public AdminDaoImpl(Connection connection){
         this.connection = connection;
@@ -239,6 +242,103 @@ public class AdminDaoImpl implements AdminDao{
             }
             connection.commit();
             return list;
+        } catch (SQLException ex) {
+            try{
+                connection.rollback();
+            }catch(SQLException x){
+                
+            }
+            throw new AdminException(ex.getMessage());
+        } finally {
+            try{
+                connection.setAutoCommit(true);
+            }catch(SQLException x){    
+            }
+            if(statement != null){
+                try{
+                    statement.close();
+                } catch(SQLException ex){
+                    
+                }
+            }
+        }
+    }
+
+    @Override
+    public List<Transaksi> selectAllTransaksi() throws AdminException {
+        PreparedStatement statement = null;
+        String sql = selectAllTransaksi;
+        
+        List<Transaksi> list = new ArrayList<Transaksi>();
+        
+        try{
+            connection.setAutoCommit(false);
+            statement = connection.prepareStatement(sql);
+            ResultSet result = statement.executeQuery();
+            
+            while(result.next()){
+                Transaksi transaksi = new Transaksi();
+                
+                transaksi.setIdTransaksi(result.getString("id_transaksi"));
+                transaksi.setNamaPelanggan(result.getString("nama_pelanggan"));
+                transaksi.setNamaMakanan(result.getString("nama_makanan"));
+                transaksi.setHargaMakanan(result.getString("harga_makanan"));
+                transaksi.setJumlahMakanan(result.getString("total_makanan"));
+                transaksi.setNamaMinuman(result.getString("nama_minuman"));
+                transaksi.setHargaMinuman(result.getString("harga_minuman"));
+                transaksi.setJumlahMinuman(result.getString("total_minuman"));
+                transaksi.setTotalBayar(result.getString("total_bayar"));
+                
+                list.add(transaksi);
+            }
+            connection.commit();
+            return list;
+        } catch (SQLException ex) {
+            try{
+                connection.rollback();
+            }catch(SQLException x){
+                
+            }
+            throw new AdminException(ex.getMessage());
+        } finally {
+            try{
+                connection.setAutoCommit(true);
+            }catch(SQLException x){    
+            }
+            if(statement != null){
+                try{
+                    statement.close();
+                } catch(SQLException ex){
+                    
+                }
+            }
+        }
+    }
+
+    @Override
+    public Home getDataHome() throws AdminException {
+        PreparedStatement statement = null;
+        
+        String sql = selectDataForHome;
+        
+        try{
+            connection.setAutoCommit(false);
+            statement = connection.prepareStatement(sql);
+            ResultSet result = statement.executeQuery();
+            
+            Home home = null;
+            
+            if(result.next()){
+                
+                home = new Home();
+                home.setTotalProduk(result.getString("total_semuabarang"));
+                home.setTotalPenjualan(result.getString("total_transaksi"));
+                home.setTotalPenghasilan(result.getString("total_penghasilan"));
+            }else{
+                throw new AdminException("Data untuk home tidak berfungsi.");
+            }
+            connection.commit();
+            return home;
         } catch (SQLException ex) {
             try{
                 connection.rollback();

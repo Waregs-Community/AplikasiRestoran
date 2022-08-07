@@ -40,10 +40,10 @@ public class Admin {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 23 * hash + this.id;
-        hash = 23 * hash + Objects.hashCode(this.nama);
-        hash = 23 * hash + this.harga;
+        int hash = 7;
+        hash = 73 * hash + this.id;
+        hash = 73 * hash + Objects.hashCode(this.nama);
+        hash = 73 * hash + this.harga;
         return hash;
     }
 

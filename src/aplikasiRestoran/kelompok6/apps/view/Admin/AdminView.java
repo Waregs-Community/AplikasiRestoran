@@ -1,8 +1,17 @@
 package aplikasiRestoran.kelompok6.apps.view.Admin;
 
 import aplikasiRestoran.kelompok6.apps.controller.AdminController;
+import aplikasiRestoran.kelompok6.apps.database.AplikasiRestoranDB;
+import aplikasiRestoran.kelompok6.apps.exception.AdminException;
+import aplikasiRestoran.kelompok6.apps.model.HomeModel;
+import aplikasiRestoran.kelompok6.apps.service.AdminDao;
+import aplikasiRestoran.kelompok6.apps.view.PilihLoginView;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class AdminView extends javax.swing.JFrame {
@@ -13,13 +22,14 @@ public class AdminView extends javax.swing.JFrame {
     DataTransaksiView dataTransaksiView;
     TentangKamiView tentangKamiView;
     
-    public AdminView() {
+    public AdminView() throws SQLException, AdminException {
         
         controller = new AdminController();
         dataMakananView = new DataMakananView();
         dataMinumanView = new DataMinumanView();
         dataTransaksiView = new DataTransaksiView();
         tentangKamiView = new TentangKamiView();
+        HomeModel model = new HomeModel();
         
         controller.setDataMakananView(dataMakananView);
         controller.setDataMinumanView(dataMinumanView);
@@ -28,6 +38,8 @@ public class AdminView extends javax.swing.JFrame {
         
         initComponents();
         
+        loadDatabase();
+        model.tampilDataHome(this);
         setExtendedState(JFrame.MAXIMIZED_HORIZ);
         setVisible(true);
         setResizable(false);
@@ -169,6 +181,11 @@ public class AdminView extends javax.swing.JFrame {
         btnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aplikasiRestoran/kelompok6/apps/asset/logout.png"))); // NOI18N
         btnKeluar.setText("Keluar");
         btnKeluar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnKeluar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnKeluarMouseClicked(evt);
+            }
+        });
         panelMenu.add(btnKeluar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 160, -1));
 
         masterPanel.add(panelMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
@@ -251,7 +268,7 @@ public class AdminView extends javax.swing.JFrame {
         txtTitle1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtTitle1.setForeground(new java.awt.Color(192, 57, 42));
         txtTitle1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtTitle1.setText("Total Penjualan");
+        txtTitle1.setText("Total Transaksi Penjualan");
 
         javax.swing.GroupLayout boxTitle1Layout = new javax.swing.GroupLayout(boxTitle1);
         boxTitle1.setLayout(boxTitle1Layout);
@@ -380,37 +397,24 @@ public class AdminView extends javax.swing.JFrame {
         controller.tentangKami(this);
     }//GEN-LAST:event_btnTentangMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdminView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdminView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdminView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdminView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void btnKeluarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKeluarMouseClicked
+        if(JOptionPane.showConfirmDialog(this, "Apakah Anda Yakin Ingin Keluar ?") == JOptionPane.OK_OPTION){
+            PilihLoginView view = new PilihLoginView();
+            view.setVisible(true);
+            this.dispose();
+        }  
+        
+    }//GEN-LAST:event_btnKeluarMouseClicked
 
-        /* Create and display the form */
+    public static void main(String args[]) {
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdminView().setVisible(true);
+                try {
+                    new AdminView().setVisible(true);
+                } catch (SQLException | AdminException ex) {
+                    Logger.getLogger(AdminView.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -441,4 +445,10 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JLabel txtTotalPenjualan;
     private javax.swing.JLabel txtTotalProduk;
     // End of variables declaration//GEN-END:variables
+    public void loadDatabase() throws SQLException, AdminException{
+        AdminDao dao = AplikasiRestoranDB.getData();
+        dao.getDataHome();
+        
+    }
+
 }
