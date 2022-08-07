@@ -38,7 +38,6 @@ public class AdminView extends javax.swing.JFrame {
         
         initComponents();
         
-        loadDatabase();
         model.tampilDataHome(this);
         setExtendedState(JFrame.MAXIMIZED_HORIZ);
         setVisible(true);
@@ -412,7 +411,9 @@ public class AdminView extends javax.swing.JFrame {
             public void run() {
                 try {
                     new AdminView().setVisible(true);
-                } catch (SQLException | AdminException ex) {
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdminView.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (AdminException ex) {
                     Logger.getLogger(AdminView.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
@@ -445,10 +446,6 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JLabel txtTotalPenjualan;
     private javax.swing.JLabel txtTotalProduk;
     // End of variables declaration//GEN-END:variables
-    public void loadDatabase() throws SQLException, AdminException{
-        AdminDao dao = AplikasiRestoranDB.getData();
-        dao.getDataHome();
-        
-    }
+
 
 }

@@ -6,44 +6,29 @@ import aplikasiRestoran.kelompok6.apps.exception.AdminException;
 import aplikasiRestoran.kelompok6.apps.service.AdminDao;
 import aplikasiRestoran.kelompok6.apps.view.Admin.AdminView;
 import java.sql.SQLException;
+import java.text.NumberFormat;
+import java.util.Locale;
+import java.util.StringTokenizer;
 
 public class HomeModel {
     
-//    private String totalProduk;
-//    private String totalPenjualan;
-//    private String totalPenghasilan;
-//
-//    public String getTotalProduk() {
-//        return totalProduk;
-//    }
-//
-//    public void setTotalProduk(String totalProduk) {
-//        this.totalProduk = totalProduk;
-//    }
-//
-//    public String getTotalPenjualan() {
-//        return totalPenjualan;
-//    }
-//
-//    public void setTotalPenjualan(String totalPenjualan) {
-//        this.totalPenjualan = totalPenjualan;
-//    }
-//
-//    public String getTotalPenghasilan() {
-//        return totalPenghasilan;
-//    }
-//
-//    public void setTotalPenghasilan(String totalPenghasilan) {
-//        this.totalPenghasilan = totalPenghasilan;
-//    }
+    public String formatRP(Home home){
+        int angka = Integer.valueOf(home.getTotalPenghasilan());
+        
+        String convert = NumberFormat.getNumberInstance(Locale.US).format(angka);
+        convert=convert.replace(",",".");
+        return ("Rp. "+ String.format(convert));
+
+    }
     
     public void tampilDataHome(AdminView view) throws SQLException, AdminException {
-        Home home = new Home();
+        Home home;
+        AdminDao dao = AplikasiRestoranDB.getData();
+        home = dao.getDataHome();
         
         view.getTxtTotalProduk().setText(home.getTotalProduk());
-//        home.setTotalProduk(totalProduk);
-//        home.setTotalPenjualan(totalPenjualan);
-//        home.setTotalPenghasilan(totalPenghasilan);
+        view.getTxtTotalPenjualan().setText(home.getTotalPenjualan());
+        view.getTxtTotalPenghasilan().setText(this.formatRP(home));
 
     }
     
