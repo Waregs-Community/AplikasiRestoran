@@ -4,14 +4,18 @@ import java.util.Objects;
 
 public class Login {
     
-    //konsep Object Relation Model (ORM)
-    //Deklarasi seluruh field sebagai atribut
     private String username;
     private String password;
-    private final String us = "Admin";
-    private final String ps = "admin123";
+    private String us;
+    private String ps;
     
-    //Getter Setter 
+    public Login(){
+        
+    }
+    public Login(String username, String password){
+        this.username = username;
+        this.password = password;
+    }
 
     public String getUsername() {
         return username;
@@ -29,15 +33,29 @@ public class Login {
         this.password = password;
     }
 
-   
-//Buat Enkripsi Password
+    public String getUs() {
+        return us;
+    }
+
+    public void setUs(String us) {
+        this.us = us;
+    }
+
+    public String getPs() {
+        return ps;
+    }
+
+    public void setPs(String ps) {
+        this.ps = ps;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 47 * hash + Objects.hashCode(this.username);
-        hash = 47 * hash + Objects.hashCode(this.password);
-        hash = 47 * hash + Objects.hashCode(this.us);
-        hash = 47 * hash + Objects.hashCode(this.ps);
+        int hash = 3;
+        hash = 41 * hash + Objects.hashCode(this.username);
+        hash = 41 * hash + Objects.hashCode(this.password);
+        hash = 41 * hash + Objects.hashCode(this.us);
+        hash = 41 * hash + Objects.hashCode(this.ps);
         return hash;
     }
 
@@ -67,14 +85,7 @@ public class Login {
         }
         return true;
     }
+
     
-    public Login(){
-        
-    }
-    public Login(String username, String password, String us, String ps){
-        this.username = username;
-        this.password = password;
-        
-    }
     
 }

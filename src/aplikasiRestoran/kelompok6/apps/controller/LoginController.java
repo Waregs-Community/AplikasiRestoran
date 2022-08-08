@@ -1,63 +1,57 @@
 package aplikasiRestoran.kelompok6.apps.controller;
 
+
 import aplikasiRestoran.kelompok6.apps.exception.PelangganException;
 import aplikasiRestoran.kelompok6.apps.model.LoginModel;
 import aplikasiRestoran.kelompok6.apps.view.LoginView;
 import aplikasiRestoran.kelompok6.apps.view.PelangganView;
-import aplikasiRestoran.kelompok6.apps.view.PilihLoginView;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 
 public class LoginController {
     
-    private PilihLoginView pilihLoginView;
-    private LoginView loginView;
-    private PelangganView pelangganView;
-
-    public PilihLoginView getPilihLoginView() {
-        return pilihLoginView;
-    }
     private LoginModel model;
-
-    public LoginModel getModel() {
-        return model;
-    }
 
     public void setModel(LoginModel model) {
         this.model = model;
     }
-
-   
     
-
-    public void setPilihLoginView(PilihLoginView pilihLoginView) {
-        this.pilihLoginView = pilihLoginView;
+    public void login(LoginView view) {
+        
+        
+    String username = view.getTxtUsername().getText();
+    String password = view.getTxtPassword().getText();
+    
+    try{
+        if(username.trim().equals("")){
+            JOptionPane.showMessageDialog(view, "Username Tidak Boleh Kosong");
+        }else if(password.trim().equals("")){
+            JOptionPane.showMessageDialog(view, "Password Tidak Boleh Kosong");
+        }else{
+            
+            model.setUsername(username);
+            model.setPassword(password);
+            
+            try{
+                model.login();
+            }catch(Exception ex) {
+                JOptionPane.showMessageDialog(view, new Object[]{
+                    "Terjadi Error Di Database Dengan Pesan", ex.getMessage()
+                });
+            }
+            
+        }
+    }catch(Exception ex){}
     }
-
-    public LoginView getLoginView() {
-        return loginView;
-    }
-
-    public void setLoginView(LoginView loginView) {
-        this.loginView = loginView;
-    }
-
-    public PelangganView getPelangganView() {
-        return pelangganView;
-    }
-
-    public void setPelangganView(PelangganView pelangganView) {
-        this.pelangganView = pelangganView;
+   
+    public void loginView(){
+        LoginView tampil = new LoginView();
+        tampil.setVisible(true);
     }
     
-   
     public void tampilPelangganView() throws PelangganException, SQLException{
         PelangganView tampil = new PelangganView();
-        tampil.setVisible(true);
-        
-    }
-    public void tampilAdminView(){
-        LoginView tampil = new LoginView();
         tampil.setVisible(true);
     }
     

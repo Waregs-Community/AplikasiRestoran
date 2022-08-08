@@ -9,14 +9,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-/**
- *
- * @author X260
- */
 public class LoginDaoImpl implements LoginDao{
+    
     private Connection connection;
     
-    private final String getByUsernamePassword = "SELECT * FROM login whereusername =? AND password = ?";
+    private final String getData = "SELECT * FROM login";
 
     public LoginDaoImpl(Connection connection){
         this.connection = connection;
@@ -24,13 +21,14 @@ public class LoginDaoImpl implements LoginDao{
   
 
     @Override
-    public Login getLoginId(int id) throws LoginException {
+    public Login getDataLogin() throws LoginException {
         PreparedStatement statement = null;
+        
+        String sql = getData;
         
         try{
             connection.setAutoCommit(false);
-            statement = connection.prepareStatement(getByUsernamePassword);
-            statement.setInt(1, id);
+            statement = connection.prepareStatement(sql);
             ResultSet result = statement.executeQuery();
             
             Login login = null;
@@ -38,10 +36,10 @@ public class LoginDaoImpl implements LoginDao{
             if(result.next()){
                 
                 login = new Login();
-                login.setUsername(result.getString("username"));
-                login.setPassword(result.getString("password"));
+                login.setUs(result.getString("username"));
+                login.setPs(result.getString("password"));
             }else{
-                throw new LoginException("Username atau Password Salah");
+                throw new LoginException("Data Login Tidak Ditemukan Didalam Database.");
             }
             connection.commit();
             return login;
@@ -66,22 +64,5 @@ public class LoginDaoImpl implements LoginDao{
             }
         }
     }
-
-    @Override
-    public void readLogin(Login login) throws LoginException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List<Login> selectAllData() throws LoginException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void getLoginId(Login login) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-   
     
 }
