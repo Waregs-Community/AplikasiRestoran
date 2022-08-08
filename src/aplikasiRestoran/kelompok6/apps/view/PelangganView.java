@@ -1,4 +1,4 @@
-   package aplikasiRestoran.kelompok6.apps.view;
+package aplikasiRestoran.kelompok6.apps.view;
 
 import aplikasiRestoran.kelompok6.apps.controller.PelangganController;
 import aplikasiRestoran.kelompok6.apps.database.AplikasiRestoranDB;
@@ -107,7 +107,7 @@ public class PelangganView extends javax.swing.JFrame implements PelangganListen
         btnPesan = new javax.swing.JButton();
         btnReset = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MENU PELANGGAN");
         setMinimumSize(new java.awt.Dimension(800, 650));
         setPreferredSize(new java.awt.Dimension(800, 720));

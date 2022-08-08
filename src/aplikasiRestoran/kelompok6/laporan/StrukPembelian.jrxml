@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="400" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7c622196-eadd-4789-97c7-c504da0ce095">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     transaksi.*,
+     makanan.`nama_makanan`,
+     minuman.`nama_minuman`,
+     makanan.`harga_makanan`,
+     minuman.`harga_minuman`
+FROM
+     `transaksi` transaksi INNER JOIN `makanan` makanan ON transaksi.`id_makanan` = makanan.`id_makanan`
+     INNER JOIN `minuman` minuman ON transaksi.`id_minuman` = minuman.`id_minuman`
+WHERE      
+	id_transaksi IN ( SELECT MAX(id_transaksi) FROM `transaksi` );]]>
+	</queryString>
+	<field name="nama_pelanggan" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nama_makanan" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="harga_makanan" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="total_makanan" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nama_minuman" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="harga_minuman" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="total_minuman" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="total_bayar" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="367" y="17" width="188" height="62" uuid="97df2772-6fcb-48b4-a96a-dd5074240bf7"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Wareg's
+Jl. Dipati Ukur No.112-116
+Lebakgede, Kecamatan Coblong, 
+Kota Bandung, Jawa Barat 40132]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="167" height="79" forecolor="#CC0000" uuid="eea60bb3-ff68-4bb8-ad17-38f9bdb41792"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="40" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Wareg's]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="91" height="30" backcolor="#CCCCCC" uuid="45cca6fd-ddf2-496f-b776-3cb56574963d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nama Pelanggan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="91" y="0" width="69" height="30" backcolor="#CCCCCC" uuid="fa6a6ca2-787b-4262-ac54-2c9906231985"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nama Makanan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="160" y="0" width="69" height="30" backcolor="#CCCCCC" uuid="3181bdfe-e86a-4e3e-9ac7-393adafdbc9a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Harga Makanan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="229" y="0" width="69" height="30" backcolor="#CCCCCC" uuid="5c48ef5c-35df-4950-a2fa-2fcda11ed6bb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Makanan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="298" y="0" width="69" height="30" backcolor="#CCCCCC" uuid="fa3ee4b9-c348-4249-a30a-1610b179fe38"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nama Minuman]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="367" y="0" width="69" height="30" backcolor="#CCCCCC" uuid="0fdadd0e-ac30-4e10-8b93-e04d4c6ab158"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Harga Minuman]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="436" y="0" width="69" height="30" backcolor="#CCCCCC" uuid="11c8e5bd-2685-4f4f-83b5-670f75ac4e07"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Minuman]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="505" y="0" width="50" height="30" backcolor="#CCCCCC" uuid="66be981f-74f1-4781-b1f2-11ffe74672ba"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Bayar]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="91" height="20" uuid="624e0dd6-153f-4488-baeb-b9a3d6bb6a26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nama_pelanggan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="91" y="0" width="69" height="20" uuid="d7ecb65e-e6c2-4ca5-add7-f529bc24589e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nama_makanan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="0" width="69" height="20" uuid="e2f3534b-59f1-4b4f-b5d3-6e048ece8d60"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{harga_makanan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="229" y="0" width="69" height="20" uuid="2b678b0f-a912-4ed6-af24-b1e65f503168"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{total_makanan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="298" y="0" width="69" height="20" uuid="64d2b015-e4f2-4f37-a6c1-9c412de7eef2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nama_minuman}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="367" y="0" width="69" height="20" uuid="a2810369-2639-4d89-893f-5d47d5c64677"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{harga_minuman}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="436" y="0" width="69" height="20" uuid="fbfdc128-7436-4a36-bf1a-b86398a662eb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{total_minuman}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="505" y="0" width="50" height="20" uuid="5e57aa2a-887a-47b0-8c3d-890e81de722a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{total_bayar}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="35" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="39" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="dfbb5e27-bce9-48a4-a2e5-e06fa3ec98e3"/>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

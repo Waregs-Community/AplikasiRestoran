@@ -1,10 +1,15 @@
 package aplikasiRestoran.kelompok6.apps.controller;
 
+import aplikasiRestoran.kelompok6.apps.database.AplikasiRestoranDB;
 import aplikasiRestoran.kelompok6.apps.exception.PelangganException;
 import aplikasiRestoran.kelompok6.apps.model.PelangganModel;
 import aplikasiRestoran.kelompok6.apps.view.PelangganView;
+import java.io.File;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class PelangganController{
     
@@ -43,6 +48,13 @@ public class PelangganController{
                 
                 try{
                     model.kirimPesanan();
+                    try{
+                        File namafile = new File("src/aplikasiRestoran/kelompok6/laporan/StrukPembelian.jasper");
+                        JasperPrint jp = JasperFillManager.fillReport(namafile.getPath(), null, AplikasiRestoranDB.getConnection());
+                        JasperViewer.viewReport(jp, false);
+                    }catch(Exception x){
+                        JOptionPane.showMessageDialog(null, x.getMessage());
+                    }
                     model.resetPesanan();
                 }catch(Exception ex){
                     JOptionPane.showMessageDialog(view, new Object[]{

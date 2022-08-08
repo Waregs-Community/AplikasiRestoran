@@ -127,9 +127,9 @@ public class PelangganModel {
         pelanggan.setTotalHarga(totalHarga);
         
         dao.insertPesanan(pelanggan);
-        JOptionPane.showMessageDialog(null, "Pesanan Anda \n Nama : "+namaPemesan+" \n makanan : "+pelanggan.getIdMakanan()+" \n harga makanan : "+
-                        hargaMakanan+" \n Qty : "+qtyMakanan+" \n Minuman : "+pelanggan.getIdMinuman()+" \n harga minuman : "+hargaMinuman+
-                                " \n Qty : "+qtyMinuman+" \n Total Bayar : "+totalHarga+"\n SILAHKAN BAYAR KE KASIR"); 
+//        JOptionPane.showMessageDialog(null, "Pesanan Anda \n Nama : "+namaPemesan+" \n makanan : "+pelanggan.getIdMakanan()+" \n harga makanan : "+
+//                        hargaMakanan+" \n Qty : "+qtyMakanan+" \n Minuman : "+pelanggan.getIdMinuman()+" \n harga minuman : "+hargaMinuman+
+//                                " \n Qty : "+qtyMinuman+" \n Total Bayar : "+totalHarga+"\n SILAHKAN BAYAR KE KASIR"); 
         this.fireOnChange();
     }
     
