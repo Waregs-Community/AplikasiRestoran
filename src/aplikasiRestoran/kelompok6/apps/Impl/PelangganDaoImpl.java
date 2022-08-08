@@ -11,11 +11,10 @@ import java.sql.SQLException;
 public class PelangganDaoImpl implements PelangganDao{
     
     private Connection connection;
-    private final String insertPesanan = "INSERT INTO transaksi"
-                                        + "(nama_pelanggan, id_makanan, harga_makanan, total_makanan, id_minuman, harga_minuman, total_minuman, total_bayar)"
-                                        + "VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)";
+    private final String insertPesanan = "INSERT INTO transaksi (nama_pelanggan, id_makanan, harga_makanan, total_makanan, id_minuman, harga_minuman, total_minuman, total_bayar) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?);";
     private final String getHMakananById = "SELECT * FROM makanan WHERE id_makanan =?";
     private final String getHMinumanById = "SELECT * FROM minuman WHERE id_minuman =?";
+    private final String getIdByName = "SELECT id_makanan, id_minuman FROM makanan INNER JOIN minuman WHERE nama_makanan=? && nama_minuman=?;";
     
     public PelangganDaoImpl(Connection connection){
         this.connection = connection;
@@ -23,21 +22,21 @@ public class PelangganDaoImpl implements PelangganDao{
     
     //Method untuk insert pesanan ke tabel transaksi
     @Override
-    public void insertPesanan(Pelanggan pesanan) throws PelangganException {
+    public void insertPesanan(Pelanggan pelanggan) throws PelangganException {
         PreparedStatement statement = null;
         
         try {
             connection.setAutoCommit(false);
             statement = connection.prepareStatement(insertPesanan);
             
-            statement.setString(1, pesanan.getNamaPemesan());
-            statement.setInt(2, pesanan.getIdMakanan());
-            statement.setInt(3, pesanan.getHargaMakanan());
-            statement.setInt(4, pesanan.getQtyMakanan());
-            statement.setInt(5, pesanan.getIdMinuman());
-            statement.setInt(6, pesanan.getHargaMinuman());
-            statement.setInt(7, pesanan.getQtyMinuman());
-            statement.setInt(8, pesanan.getTotalHarga());
+            statement.setString(1, pelanggan.getNamaPemesan());
+            statement.setInt(2, pelanggan.getIdMakanan());
+            statement.setInt(3, pelanggan.getHargaMakanan());
+            statement.setInt(4, pelanggan.getQtyMakanan());
+            statement.setInt(5, pelanggan.getIdMinuman());
+            statement.setInt(6, pelanggan.getHargaMinuman());
+            statement.setInt(7, pelanggan.getQtyMinuman());
+            statement.setInt(8, pelanggan.getTotalHarga());
             statement.executeUpdate();    
             
             connection.commit();
@@ -121,6 +120,45 @@ public class PelangganDaoImpl implements PelangganDao{
                                             +" Tidak Ditemukan di DataBase");
             }
             return harga;
+        }catch(SQLException ex){
+            throw new PelangganException(ex.getMessage());
+        }
+        finally{
+            if(statement != null){
+                try{
+                    statement.close();
+                } catch(SQLException ex){
+                    
+                }
+            }
+        }
+    }
+
+    @Override
+    public Pelanggan getIdByName(String namaMakanan, String namaMinuman) throws PelangganException {
+        PreparedStatement statement = null;
+        
+        String sql = getIdByName;
+        
+        try{
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, namaMakanan);
+            statement.setString(2, namaMinuman);
+            ResultSet result = statement.executeQuery();
+            
+            Pelanggan pelanggan = null;
+            
+            if(result.next()){
+                pelanggan = new Pelanggan();
+
+                pelanggan.setIdMakanan(result.getInt("id_makanan"));
+                pelanggan.setIdMinuman(result.getInt("id_minuman"));
+                
+            }else{
+                throw new PelangganException("Data ID dengan nama = "+namaMakanan+namaMinuman
+                                            +" Tidak Ditemukan di DataBase");
+            }
+            return pelanggan;
         }catch(SQLException ex){
             throw new PelangganException(ex.getMessage());
         }

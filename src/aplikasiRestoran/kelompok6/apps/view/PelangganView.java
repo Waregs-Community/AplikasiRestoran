@@ -2,6 +2,7 @@
 
 import aplikasiRestoran.kelompok6.apps.controller.PelangganController;
 import aplikasiRestoran.kelompok6.apps.database.AplikasiRestoranDB;
+import aplikasiRestoran.kelompok6.apps.entity.Pelanggan;
 import aplikasiRestoran.kelompok6.apps.event.PelangganListener;
 import aplikasiRestoran.kelompok6.apps.exception.PelangganException;
 import aplikasiRestoran.kelompok6.apps.model.PelangganModel;
@@ -22,9 +23,9 @@ public class PelangganView extends javax.swing.JFrame implements PelangganListen
     
     public PelangganView() throws PelangganException, SQLException {
         model = new PelangganModel();
-        controller = new PelangganController();
+        model.setListener(this);
         
-        model.setPelangganListener(this);
+        controller = new PelangganController();
         controller.setModel(model);
         
         initComponents();
@@ -517,12 +518,16 @@ public class PelangganView extends javax.swing.JFrame implements PelangganListen
 
     @Override
     public void onChange(PelangganModel pelanggan) {
-
-    }
-
-    @Override
-    public void onInsert(PelangganModel pelanggan) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        this.getCmbMakanan().setSelectedItem(model.getNamaMakanan());
+        this.getCmbMinuman().setSelectedItem(model.getNamaMinuman());
+        this.getTxtQtyMakanan().setText(String.valueOf(model.getQtyMakanan()));
+        this.getTxtQtyMinuman().setText(String.valueOf(model.getQtyMinuman()));
+        this.getTxtHargaMakanan().setText(String.valueOf(model.getHargaMakanan()));
+        this.getTxtHargaMinuman().setText(String.valueOf(model.getHargaMinuman()));
+        this.getTxtNamaPemesan().setText(model.getNamaPemesan());
+        this.getTxtTotalHarga().setText(String.valueOf(model.getTotalHarga()));
+        
     }
 
 }
