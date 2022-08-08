@@ -45,16 +45,17 @@ private LoginController controller;
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(192, 57, 43));
-        setPreferredSize(new java.awt.Dimension(800, 720));
+        setPreferredSize(new java.awt.Dimension(750, 640));
         getContentPane().setLayout(new java.awt.CardLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         PanelBody.setBackground(new java.awt.Color(192, 57, 43));
+        PanelBody.setPreferredSize(new java.awt.Dimension(750, 640));
         PanelBody.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         iconBrand.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aplikasiRestoran/kelompok6/apps/asset/brand.png"))); // NOI18N
-        PanelBody.add(iconBrand, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, -1));
+        PanelBody.add(iconBrand, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, -1, -1));
 
         Panel.setBackground(new java.awt.Color(255, 255, 255));
         Panel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 204, 51), 5));
@@ -85,7 +86,7 @@ private LoginController controller;
                 btnAdminMouseClicked(evt);
             }
         });
-        PanelLoginAs.add(btnAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 140, 100));
+        PanelLoginAs.add(btnAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 150, 100));
 
         btnPelanggan.setBackground(new java.awt.Color(192, 57, 43));
         btnPelanggan.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -99,7 +100,7 @@ private LoginController controller;
                 btnPelangganMouseClicked(evt);
             }
         });
-        PanelLoginAs.add(btnPelanggan, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 230, 150, 100));
+        PanelLoginAs.add(btnPelanggan, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 230, 150, 100));
 
         PanelHiThere.add(PanelLoginAs, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 400, 430));
 
