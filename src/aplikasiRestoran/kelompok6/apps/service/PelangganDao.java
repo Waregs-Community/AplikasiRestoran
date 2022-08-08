@@ -2,10 +2,10 @@ package aplikasiRestoran.kelompok6.apps.service;
 
 import aplikasiRestoran.kelompok6.apps.entity.Pelanggan;
 import aplikasiRestoran.kelompok6.apps.exception.PelangganException;
-import java.util.List;
 
 
 public interface PelangganDao {
+    
     public void insertPesanan(Pelanggan pesanan) throws PelangganException;
     
     public Pelanggan getHMakananById(Integer id) throws PelangganException;

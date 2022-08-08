@@ -16,6 +16,23 @@ public class Pelanggan {
     private String namaPemesan;
     private int totalHarga;
 
+    public Pelanggan(){
+    
+    }
+    
+    public Pelanggan(int idMakanan, int idMinuman, String namaMakanan, String namaMinuman, int hargaMakanan, int hargaMinuman, int qtyMakanan, int qtyMinuman, String namaPemesan, int totalHarga){
+        this.idMakanan = idMakanan;
+        this.idMakanan = idMinuman;
+        this.namaMakanan = namaMakanan;
+        this.namaMinuman = namaMinuman;
+        this.hargaMakanan = hargaMakanan;
+        this.hargaMinuman = hargaMinuman;
+        this.qtyMakanan = qtyMakanan;
+        this.qtyMinuman = qtyMinuman;
+        this.namaPemesan = namaPemesan;
+        this.totalHarga = totalHarga;
+    }
+    
     public int getIdMakanan() {
         return idMakanan;
     }
@@ -145,23 +162,6 @@ public class Pelanggan {
             return false;
         }
         return true;
-    }
-    
-    public Pelanggan(){
-    
-    }
-    
-    public Pelanggan(int idMakanan, int idMinuman, String namaMakanan, String namaMinuman, int hargaMakanan, int hargaMinuman, int qtyMakanan, int qtyMinuman, String namaPemesan, int totalHarga){
-        this.idMakanan = idMakanan;
-        this.idMakanan = idMinuman;
-        this.namaMakanan = namaMakanan;
-        this.namaMinuman = namaMinuman;
-        this.hargaMakanan = hargaMakanan;
-        this.hargaMinuman = hargaMinuman;
-        this.qtyMakanan = qtyMakanan;
-        this.qtyMinuman = qtyMinuman;
-        this.namaPemesan = namaPemesan;
-        this.totalHarga = totalHarga;
     }
     
 }

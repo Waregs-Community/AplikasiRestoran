@@ -1,6 +1,5 @@
 package aplikasiRestoran.kelompok6.apps.model;
 
-import aplikasiRestoran.kelompok6.apps.Impl.PelangganDaoImpl;
 import aplikasiRestoran.kelompok6.apps.database.AplikasiRestoranDB;
 import aplikasiRestoran.kelompok6.apps.entity.Pelanggan;
 import aplikasiRestoran.kelompok6.apps.event.PelangganListener;
@@ -8,20 +7,20 @@ import aplikasiRestoran.kelompok6.apps.exception.PelangganException;
 import aplikasiRestoran.kelompok6.apps.service.PelangganDao;
 import aplikasiRestoran.kelompok6.apps.view.PelangganView;
 import java.sql.SQLException;
-import javax.swing.JOptionPane;
 
 
 public class PelangganModel {
+    
     private String namaPemesan;
-    private String namaMakanan;
-    private String namaMinuman;
+    private int idMakanan;
     private int hargaMakanan;
-    private int hargaMinuman;
     private int qtyMakanan;
+    private int idMinuman;
+    private int hargaMinuman;
     private int qtyMinuman;
     private int totalHarga;
     private PelangganListener pelangganListener;
-    
+
 
     public String getNamaPemesan() {
         return namaPemesan;
@@ -30,18 +29,11 @@ public class PelangganModel {
         this.namaPemesan = namaPemesan;
     }
 
-    public String getNamaMakanan() {
-        return namaMakanan;
+    public int getIdMakanan() {
+        return idMakanan;
     }
-    public void setNamaMakanan(String namaMakanan) {
-        this.namaMakanan = namaMakanan;
-    }
-
-    public String getNamaMinuman() {
-        return namaMinuman;
-    }
-    public void setNamaMinuman(String namaMinuman) {
-        this.namaMinuman = namaMinuman;
+    public void setIdMakanan(int idMakanan) {
+        this.idMakanan = idMakanan;
     }
 
     public int getHargaMakanan() {
@@ -51,13 +43,6 @@ public class PelangganModel {
         this.hargaMakanan = hargaMakanan;
     }
 
-    public int getHargaMinuman() {
-        return hargaMinuman;
-    }
-    public void setHargaMinuman(int hargaMinuman) {
-        this.hargaMinuman = hargaMinuman;
-    }
-
     public int getQtyMakanan() {
         return qtyMakanan;
     }
@@ -65,6 +50,20 @@ public class PelangganModel {
         this.qtyMakanan = qtyMakanan;
     }
 
+    public int getIdMinuman() {
+        return idMinuman;
+    }
+    public void setIdMinuman(int idMinuman) {
+        this.idMinuman = idMinuman;
+    }
+
+    public int getHargaMinuman() {
+        return hargaMinuman;
+    }
+    public void setHargaMinuman(int hargaMinuman) {
+        this.hargaMinuman = hargaMinuman;
+    }
+    
     public int getQtyMinuman() {
         return qtyMinuman;
     }
@@ -78,6 +77,9 @@ public class PelangganModel {
     public void setTotalHarga(int totalHarga) {
         this.totalHarga = totalHarga;
     }
+    
+
+
     
     public PelangganListener getPelangganListener() {
         return pelangganListener;
@@ -96,18 +98,17 @@ public class PelangganModel {
     
     protected void fireOnInsert(Pelanggan pelanggan){
         if(pelangganListener != null){
-            pelangganListener.onInsert(pelanggan);
-            this.fireOnChange();
+            pelangganListener.onInsert(this);
         }
     }
     
     public void kirimPesanan(PelangganView view) throws SQLException, PelangganException{
         PelangganDao dao = AplikasiRestoranDB.getDataPesanan();
-        Pelanggan pelanggan = new Pelanggan();
-        
-        dao.insertPesanan(pelanggan);
-        JOptionPane.showMessageDialog(null, "Silahkan bayar Ke Kasir");
-        this.fireOnInsert(pelanggan);
+        Pelanggan pesanan = new Pelanggan();
+               
+        dao.insertPesanan(pesanan);
+        this.fireOnChange();
+        this.fireOnInsert(pesanan);
     }
     
     public void resetPesanan(PelangganView view){
@@ -118,7 +119,9 @@ public class PelangganModel {
         view.getTxtHargaMakanan().setText("");
         view.getTxtHargaMinuman().setText("");
         view.getTxtNamaPemesan().setText("");
-        view.getTxtTotalHarga().setText("");   
+        view.getTxtTotalHarga().setText("");
+        
+        this.fireOnChange();
     }
     
 }
