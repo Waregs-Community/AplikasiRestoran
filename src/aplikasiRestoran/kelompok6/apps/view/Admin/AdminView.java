@@ -1,10 +1,8 @@
 package aplikasiRestoran.kelompok6.apps.view.Admin;
 
 import aplikasiRestoran.kelompok6.apps.controller.AdminController;
-import aplikasiRestoran.kelompok6.apps.database.AplikasiRestoranDB;
 import aplikasiRestoran.kelompok6.apps.exception.AdminException;
 import aplikasiRestoran.kelompok6.apps.model.HomeModel;
-import aplikasiRestoran.kelompok6.apps.service.AdminDao;
 import aplikasiRestoran.kelompok6.apps.view.PilihLoginView;
 import java.sql.SQLException;
 import java.util.logging.Level;

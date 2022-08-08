@@ -5,7 +5,6 @@ import aplikasiRestoran.kelompok6.apps.entity.Pelanggan;
 import aplikasiRestoran.kelompok6.apps.event.PelangganListener;
 import aplikasiRestoran.kelompok6.apps.exception.PelangganException;
 import aplikasiRestoran.kelompok6.apps.service.PelangganDao;
-import aplikasiRestoran.kelompok6.apps.view.PelangganView;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -119,11 +118,9 @@ public class PelangganModel {
         pelanggan = dao.getIdByName(namaMakanan, namaMinuman);
         
         pelanggan.setNamaPemesan(namaPemesan);
-//        pelanggan.setIdMakanan(idMakanan);
         pelanggan.setNamaMakanan(namaMakanan);
         pelanggan.setHargaMakanan(hargaMakanan);
         pelanggan.setQtyMakanan(qtyMakanan);
-//        pelanggan.setIdMinuman(idMinuman);
         pelanggan.setNamaMinuman(namaMinuman);
         pelanggan.setHargaMinuman(hargaMinuman);
         pelanggan.setQtyMinuman(qtyMinuman);

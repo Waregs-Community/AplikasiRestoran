@@ -34,7 +34,7 @@ public class LoginController {
             model.setPassword(password);
             
             try{
-                model.login();
+                model.login(view);
             }catch(Exception ex) {
                 JOptionPane.showMessageDialog(view, new Object[]{
                     "Terjadi Error Di Database Dengan Pesan", ex.getMessage()

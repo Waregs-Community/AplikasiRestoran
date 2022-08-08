@@ -1,6 +1,5 @@
 package aplikasiRestoran.kelompok6.apps.controller;
 
-import aplikasiRestoran.kelompok6.apps.Impl.PelangganDaoImpl;
 import aplikasiRestoran.kelompok6.apps.exception.PelangganException;
 import aplikasiRestoran.kelompok6.apps.model.PelangganModel;
 import aplikasiRestoran.kelompok6.apps.view.PelangganView;

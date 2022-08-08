@@ -7,6 +7,7 @@ import aplikasiRestoran.kelompok6.apps.exception.AdminException;
 import aplikasiRestoran.kelompok6.apps.exception.LoginException;
 import aplikasiRestoran.kelompok6.apps.service.LoginDao;
 import aplikasiRestoran.kelompok6.apps.view.Admin.AdminView;
+import aplikasiRestoran.kelompok6.apps.view.LoginView;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -46,7 +47,7 @@ public class LoginModel {
         }
     }
     
-    public void login() throws SQLException, LoginException, AdminException{
+    public void login(LoginView view) throws SQLException, LoginException, AdminException{
         LoginDao dao = AplikasiRestoranDB.getDataLogin();
         Login login = new Login();
         
@@ -61,6 +62,7 @@ public class LoginModel {
         }else{
             JOptionPane.showMessageDialog(null, "Login Berhasil");
             tampilAdminView();
+            view.dispose();
         }
     }
     

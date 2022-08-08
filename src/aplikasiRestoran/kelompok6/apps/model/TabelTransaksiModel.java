@@ -1,6 +1,5 @@
 package aplikasiRestoran.kelompok6.apps.model;
 
-import aplikasiRestoran.kelompok6.apps.entity.Admin;
 import aplikasiRestoran.kelompok6.apps.entity.Transaksi;
 import java.util.ArrayList;
 import java.util.List;
