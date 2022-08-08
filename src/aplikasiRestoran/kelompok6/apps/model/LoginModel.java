@@ -57,7 +57,7 @@ public class LoginModel {
         login.setPassword(this.password);
         this.fireOnChange();
         
-        if(!login.getUs().equals(login.getUsername())){
+        if(!login.getUs().equals(login.getUsername()) && !login.getUs().equals(login.getUsername())){
             JOptionPane.showMessageDialog(null, "Username atau Password Salah");
         }else{
             JOptionPane.showMessageDialog(null, "Login Berhasil");
