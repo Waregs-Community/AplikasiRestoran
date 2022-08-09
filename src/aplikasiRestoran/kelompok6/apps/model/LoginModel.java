@@ -51,18 +51,18 @@ public class LoginModel {
         LoginDao dao = AplikasiRestoranDB.getDataLogin();
         Login login = new Login();
         
-        login = dao.getDataLogin();;
+        login = dao.getDataLogin();
         
         login.setUsername(this.username);
         login.setPassword(this.password);
         this.fireOnChange();
         
-        if(!login.getUs().equals(login.getUsername()) && !login.getUs().equals(login.getUsername())){
-            JOptionPane.showMessageDialog(null, "Username atau Password Salah");
-        }else{
+        if(login.getUs().equals(login.getUsername()) && login.getPs().equals(login.getPassword())){
             JOptionPane.showMessageDialog(null, "Login Berhasil");
             tampilAdminView();
             view.dispose();
+        }else{
+            JOptionPane.showMessageDialog(null, "Username atau Password Salah");
         }
     }
     

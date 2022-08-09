@@ -22,6 +22,8 @@ public class MinumanController {
         
         if(id.trim().equals("")){
             JOptionPane.showMessageDialog(view, "Field ID Tidak Boleh Kosong.");
+        }else if(id.equals("0")){
+            JOptionPane.showMessageDialog(view, "Field ID Tidak Boleh 0.");
         }else if(nama.trim().equals("")){
             JOptionPane.showMessageDialog(view, "Field Nama Tidak Boleh Kosong.");
         }else if(harga.trim().equals("")){

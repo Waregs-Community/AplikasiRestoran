@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="400" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7c622196-eadd-4789-97c7-c504da0ce095">
-	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.zoom" value="1.9487171000000014"/>
+	<property name="ireport.x" value="75"/>
+	<property name="ireport.y" value="47"/>
 	<queryString language="SQL">
 		<![CDATA[SELECT
      transaksi.*,
@@ -70,13 +70,13 @@ Kota Bandung, Jawa Barat 40132 ]]></text>
 			</textField>
 			<staticText>
 				<reportElement x="0" y="59" width="160" height="20" uuid="f9b49ea7-3dd7-4389-8e85-03140e442d5a"/>
-				<textElement textAlignment="Center">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[NAMA PEMESAN	     :]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="160" y="59" width="108" height="20" uuid="624e0dd6-153f-4488-baeb-b9a3d6bb6a26"/>
+				<reportElement x="160" y="59" width="115" height="20" uuid="624e0dd6-153f-4488-baeb-b9a3d6bb6a26"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>

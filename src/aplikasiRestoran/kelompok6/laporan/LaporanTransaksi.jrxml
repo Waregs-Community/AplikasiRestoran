@@ -12,7 +12,9 @@
      minuman.`harga_minuman`
 FROM
      `transaksi` transaksi INNER JOIN `makanan` makanan ON transaksi.`id_makanan` = makanan.`id_makanan`
-     INNER JOIN `minuman` minuman ON transaksi.`id_minuman` = minuman.`id_minuman`]]>
+     INNER JOIN `minuman` minuman ON transaksi.`id_minuman` = minuman.`id_minuman`
+
+ORDER BY `id_transaksi` ASC]]>
 	</queryString>
 	<field name="id_transaksi" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>

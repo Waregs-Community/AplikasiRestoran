@@ -33,9 +33,16 @@ public class PelangganController{
             String qtyMinuman = view.getTxtQtyMinuman().getText();
             String totalBayar = view.getTxtTotalHarga().getText();
         
-            if(namaPemesan.equals("") && namaMakanan.equals("") & namaMinuman.equals("") && hargaMakanan.equals("") && hargaMinuman.equals("") 
-                && qtyMakanan.equals("") && qtyMinuman.equals("") && totalBayar.equals("")){
-                JOptionPane.showMessageDialog(view, "Silahkan Pilih Menu Terlebih Dahulu");
+            if(namaPemesan.equals("")){
+                JOptionPane.showMessageDialog(view, "Silahkan Masukan Nama Anda");
+            }else if(namaMakanan.equals("      -- PILIH MAKANAN --")){
+                JOptionPane.showMessageDialog(view, "Silahkan Pilih Makanan Yang Akan Dibeli");
+            }else if(qtyMakanan.equals("")){
+                JOptionPane.showMessageDialog(view, "Silahkan Masukan Jumlah Makanan Yang Akan Dibeli");
+            }else if(namaMinuman.equals("      -- PILIH MINUMAN --")){
+                JOptionPane.showMessageDialog(view, "Silahkan Pilih Minuman Yang Akan Dibeli");
+            }else if(qtyMinuman.equals("")){
+                JOptionPane.showMessageDialog(view, "Silahkan Masukan Jumlah Minuman Yang Akan Dibeli");
             }else {
                 model.setNamaPemesan(namaPemesan);
                 model.setNamaMakanan(namaMakanan);

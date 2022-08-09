@@ -28,7 +28,7 @@ public class AdminDaoImpl implements AdminDao{
     private final String selectAllMinuman = "SELECT * FROM minuman";
     
     private final String selectDataForHome = "SELECT (SELECT count(*) FROM makanan)+(SELECT count(*) FROM minuman) as total_semuabarang, COUNT(*) AS total_transaksi, SUM(total_bayar) AS total_penghasilan FROM transaksi;";
-    private final String selectAllTransaksi = "SELECT transaksi.*, makanan.nama_makanan, minuman.nama_minuman, makanan.harga_makanan, minuman.harga_minuman FROM transaksi INNER JOIN makanan ON transaksi.id_makanan = makanan.id_makanan INNER JOIN minuman ON transaksi.id_minuman = minuman.id_minuman";
+    private final String selectAllTransaksi = "SELECT transaksi.*, makanan.nama_makanan, minuman.nama_minuman, makanan.harga_makanan, minuman.harga_minuman FROM transaksi INNER JOIN makanan ON transaksi.id_makanan = makanan.id_makanan INNER JOIN minuman ON transaksi.id_minuman = minuman.id_minuman ORDER BY `transaksi`.`id_transaksi` ASC";
     
     public AdminDaoImpl(Connection connection){
         this.connection = connection;
